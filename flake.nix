@@ -11,7 +11,10 @@
       in
       {
         devShell = with pkgs; mkShell {
-          buildInputs = [ godot_4 ];
+          buildInputs = [
+            godot_4
+            aseprite
+          ];
         };
       }
     );
