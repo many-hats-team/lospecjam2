@@ -3,7 +3,7 @@ extends CharacterBody3D
 
 const MOVE_INPUT_SCALE := Vector2(5.0, 5.0)
 const MOVE_LERP_BASE := 0.3
-const MOVE_LERP_SCALE := 100.0
+const MOVE_LERP_SCALE := 4.0
 
 
 func get_input_vector() -> Vector2:
@@ -15,6 +15,6 @@ func _physics_process(delta: float) -> void:
 
 	var weight = pow(MOVE_LERP_BASE, delta * MOVE_LERP_SCALE)
 
-	velocity.x = lerpf(velocity.x, target_velocity.x, weight)
-	velocity.z = lerpf(velocity.z, target_velocity.y, weight)
+	velocity.x = lerpf(target_velocity.x, velocity.x, weight)
+	velocity.z = lerpf(target_velocity.y, velocity.z, weight)
 	move_and_slide()
