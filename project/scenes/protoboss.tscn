@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1m14kpdnhtta"]
+
+[ext_resource type="Script" path="res://scripts/protoboss.gd" id="1_1sbx5"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_kgam4"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x364u"]
+
+[node name="ProtoBoss" type="CharacterBody3D"]
+collision_layer = 4
+script = ExtResource("1_1sbx5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_kgam4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_x364u")
+
+[node name="BulletTimer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.4
+autostart = true
+
+[connection signal="timeout" from="BulletTimer" to="." method="_on_bullet_timer_timeout"]

@@ -1,9 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cahesrp5r3fya"]
+[gd_scene load_steps=8 format=3 uid="uid://cahesrp5r3fya"]
 
 [ext_resource type="Texture2D" uid="uid://dab0txvnv5ig2" path="res://assets/road.png" id="1_di5b1"]
 [ext_resource type="PackedScene" uid="uid://c8at0t7xwevmr" path="res://scenes/player.tscn" id="2_15ibv"]
 [ext_resource type="Script" path="res://scripts/camera_follow.gd" id="2_eimwo"]
-[ext_resource type="PackedScene" uid="uid://d1m14kpdnhtta" path="res://scenes/enemy.tscn" id="3_wdbhd"]
+[ext_resource type="PackedScene" uid="uid://d1m14kpdnhtta" path="res://scenes/protoboss.tscn" id="3_wdbhd"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pbs84"]
 shading_mode = 0
@@ -12,6 +12,9 @@ texture_filter = 0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_j8p7f"]
 material = SubResource("StandardMaterial3D_pbs84")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cdsm1"]
+size = Vector3(13.0049, 2.03235, 1.17163)
 
 [node name="Node" type="Node"]
 
@@ -55,9 +58,18 @@ script = ExtResource("2_eimwo")
 target_path = NodePath("../Player")
 
 [node name="Player" parent="Node3D" instance=ExtResource("2_15ibv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.237524, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Node3D"]
 transform = Transform3D(0.965926, -1.13133e-08, 0.258819, -0.25, 0.258819, 0.933013, -0.0669873, -0.965926, 0.25, 0, 4, 0)
 
-[node name="Enemy" parent="Node3D" instance=ExtResource("3_wdbhd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
+[node name="Boss" parent="Node3D" instance=ExtResource("3_wdbhd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.270555, -3)
+target_path = NodePath("../Player")
+
+[node name="Barrier" type="StaticBody3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.10166)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/Barrier"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0161133, 0.516174, -0.768921)
+shape = SubResource("BoxShape3D_cdsm1")
