@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 mgmt="*res://scripts/game_manager.gd"
 
+[debug]
+
+gdscript/warnings/static_called_on_instance=0
+
 [display]
 
 window/size/viewport_width=256
