@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://d1m14kpdnhtta"]
+[gd_scene load_steps=5 format=3 uid="uid://d1m14kpdnhtta"]
 
 [ext_resource type="Script" path="res://scripts/protoboss.gd" id="1_1sbx5"]
+[ext_resource type="PackedScene" uid="uid://cpkh5vm3hiyxb" path="res://scenes/bullet_spawner.tscn" id="2_us7nl"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_kgam4"]
 
@@ -16,9 +17,9 @@ mesh = SubResource("BoxMesh_kgam4")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_x364u")
 
-[node name="BulletTimer" type="Timer" parent="."]
-process_callback = 0
-wait_time = 0.4
-autostart = true
-
-[connection signal="timeout" from="BulletTimer" to="." method="_on_bullet_timer_timeout"]
+[node name="BulletSpawner" parent="." instance=ExtResource("2_us7nl")]
+wait_time = 0.6
+bullet_type = 1
+speed = 3.0
+spread = 0.2
+count = 3

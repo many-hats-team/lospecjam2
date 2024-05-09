@@ -16,7 +16,7 @@ static func trait_name() -> StringName:
 	return ""
 
 static func _trait_get(obj: Object, name: StringName) -> Trait:
-	if obj == null:
+	if obj == null or not obj.has_meta(name):
 		return null
 	return obj.get_meta(name)
 

@@ -1,9 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://cahesrp5r3fya"]
+[gd_scene load_steps=11 format=3 uid="uid://cahesrp5r3fya"]
 
 [ext_resource type="Texture2D" uid="uid://dab0txvnv5ig2" path="res://assets/road.png" id="1_di5b1"]
+[ext_resource type="Script" path="res://scripts/world.gd" id="1_mh1ta"]
 [ext_resource type="PackedScene" uid="uid://c8at0t7xwevmr" path="res://scenes/player.tscn" id="2_15ibv"]
 [ext_resource type="Script" path="res://scripts/camera_follow.gd" id="2_eimwo"]
 [ext_resource type="PackedScene" uid="uid://d1m14kpdnhtta" path="res://scenes/protoboss.tscn" id="3_wdbhd"]
+[ext_resource type="Script" path="res://scripts/despawner.gd" id="6_jxhrw"]
+[ext_resource type="PackedScene" uid="uid://dpolfsh15rvao" path="res://scenes/enemy_spawner.tscn" id="6_shj7u"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pbs84"]
 shading_mode = 0
@@ -45,31 +48,49 @@ grow_vertical = 2
 text = "Hello, World!
 "
 
-[node name="Node3D" type="Node3D" parent="."]
+[node name="World" type="Node3D" parent="."]
+script = ExtResource("1_mh1ta")
 
-[node name="Road" type="MeshInstance3D" parent="Node3D"]
+[node name="Road" type="MeshInstance3D" parent="World"]
 transform = Transform3D(6, 0, 0, 0, 1, 0, 0, 0, 4, 0, 0, 0)
 mesh = SubResource("PlaneMesh_j8p7f")
 
-[node name="Camera3D" type="Camera3D" parent="Node3D"]
+[node name="Camera3D" type="Camera3D" parent="World"]
 transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 2.5, 6)
 fov = 50.0
 script = ExtResource("2_eimwo")
 target_path = NodePath("../Player")
 
-[node name="Player" parent="Node3D" instance=ExtResource("2_15ibv")]
+[node name="Player" parent="World" instance=ExtResource("2_15ibv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.237524, 0)
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Node3D"]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World"]
 transform = Transform3D(0.965926, -1.13133e-08, 0.258819, -0.25, 0.258819, 0.933013, -0.0669873, -0.965926, 0.25, 0, 4, 0)
 
-[node name="Boss" parent="Node3D" instance=ExtResource("3_wdbhd")]
+[node name="Boss" parent="World" instance=ExtResource("3_wdbhd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.270555, -3)
-target_path = NodePath("../Player")
 
-[node name="Barrier" type="StaticBody3D" parent="Node3D"]
+[node name="Barrier" type="StaticBody3D" parent="World"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.10166)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/Barrier"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Barrier"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0161133, 0.516174, -0.768921)
 shape = SubResource("BoxShape3D_cdsm1")
+
+[node name="Despawner" type="Area3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.63541)
+collision_layer = 0
+collision_mask = 20
+script = ExtResource("6_jxhrw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Despawner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0161133, 0.516174, -1.70575)
+shape = SubResource("BoxShape3D_cdsm1")
+
+[node name="EnemySpawnPoint" type="Marker3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.309434, -4.40665)
+
+[node name="EnemySpawner" parent="World/EnemySpawnPoint" instance=ExtResource("6_shj7u")]
+wait_time = 2.0
+speed = 2.0
+offset = 2.0

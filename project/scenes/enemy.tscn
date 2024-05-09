@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://bu3dgfpefsqbi"]
+
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_77ic1"]
+[ext_resource type="PackedScene" uid="uid://cpkh5vm3hiyxb" path="res://scenes/bullet_spawner.tscn" id="2_xepk4"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_dgtcb"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6jsf0"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[node name="Enemy" type="CharacterBody3D"]
+collision_layer = 4
+script = ExtResource("1_77ic1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_dgtcb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_6jsf0")
+
+[node name="BulletSpawner" parent="." instance=ExtResource("2_xepk4")]
+wait_time = 1.0
+bullet_type = 1
+speed = 5.0
