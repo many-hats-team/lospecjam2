@@ -3,7 +3,14 @@ extends CharacterBody3D
 const BulletScene := preload("res://scenes/bullet.tscn")
 
 
+var health := 11
+
+
+@onready var sprite: MySprite = %Sprite
+
+
 func _ready() -> void:
+	assert(sprite)
 	HitBox.new(self, _on_hit)
 
 
@@ -17,4 +24,9 @@ func setup(pos: Vector3, vel: Vector3) -> void:
 
 
 func _on_hit() -> void:
-	queue_free()
+	health -= 1
+	if health <= 0:
+		queue_free()
+		return
+
+	sprite.hit_flash()
