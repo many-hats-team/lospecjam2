@@ -20,17 +20,14 @@ uniform vec3 uv2_offset;
 uniform bool flash = false;
 uniform vec3 flash_color = vec3(1.0);
 
+const float PIXEL_SCALE = 2.0;
 
 void vertex() {
 	UV=UV*uv1_scale.xy+uv1_offset.xy;
+	VERTEX *= PIXEL_SCALE;
 	MODELVIEW_MATRIX = VIEW_MATRIX * mat4(INV_VIEW_MATRIX[0], INV_VIEW_MATRIX[1], INV_VIEW_MATRIX[2], MODEL_MATRIX[3]);
 	MODELVIEW_NORMAL_MATRIX = mat3(MODELVIEW_MATRIX);
 }
-
-
-
-
-
 
 void fragment() {
 	vec2 base_uv = UV;
