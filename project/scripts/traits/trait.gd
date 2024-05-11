@@ -20,5 +20,5 @@ static func _trait_get(obj: Object, name: StringName) -> Trait:
 		return null
 	return obj.get_meta(name)
 
-func trait_attach(obj: Object) -> void:
+func _init(obj: Object) -> void:
 	obj.set_meta(trait_name(), self)

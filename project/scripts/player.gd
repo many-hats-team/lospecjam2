@@ -10,7 +10,7 @@ const MOVE_LERP_SCALE := 8.0
 
 
 func _ready() -> void:
-	HitBox.new(hit).trait_attach(self)
+	HitBox.new(self, hit)
 	mgmt.player = self
 
 

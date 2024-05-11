@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://scripts/camera_follow.gd" id="2_eimwo"]
 [ext_resource type="PackedScene" uid="uid://d1m14kpdnhtta" path="res://scenes/protoboss.tscn" id="3_wdbhd"]
 [ext_resource type="Script" path="res://scripts/despawner.gd" id="6_jxhrw"]
-[ext_resource type="PackedScene" uid="uid://dpolfsh15rvao" path="res://scenes/enemy_spawner.tscn" id="6_shj7u"]
+[ext_resource type="PackedScene" uid="uid://dpolfsh15rvao" path="res://scenes/components/enemy_spawner.tscn" id="6_shj7u"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pbs84"]
 shading_mode = 0

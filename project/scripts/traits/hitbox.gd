@@ -9,7 +9,8 @@ static func trait_get(obj: Object) -> HitBox:
 
 var _hit: Callable
 
-func _init(hitFn: Callable) -> void:
+func _init(obj: Object, hitFn: Callable) -> void:
+	super(obj)
 	_hit = hitFn
 
 func hit() -> void:

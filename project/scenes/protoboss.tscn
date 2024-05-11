@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://d1m14kpdnhtta"]
 
 [ext_resource type="Script" path="res://scripts/protoboss.gd" id="1_1sbx5"]
-[ext_resource type="PackedScene" uid="uid://cpkh5vm3hiyxb" path="res://scenes/bullet_spawner.tscn" id="2_us7nl"]
+[ext_resource type="PackedScene" uid="uid://cpkh5vm3hiyxb" path="res://scenes/components/bullet_spawner.tscn" id="2_us7nl"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_kgam4"]
 

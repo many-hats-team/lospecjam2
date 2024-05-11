@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://cpkh5vm3hiyxb"]
 
-[ext_resource type="Script" path="res://scripts/components/bullet_spawner.gd" id="1_gvajp"]
+[ext_resource type="Script" path="res://scripts/components/bullet_spawner.gd" id="1_by1a1"]
 
 [node name="BulletSpawner" type="Timer"]
 process_callback = 0
 wait_time = 0.4
 autostart = true
-script = ExtResource("1_gvajp")
+script = ExtResource("1_by1a1")

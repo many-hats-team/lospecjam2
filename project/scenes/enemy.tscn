@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bu3dgfpefsqbi"]
+[gd_scene load_steps=6 format=3 uid="uid://bu3dgfpefsqbi"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_77ic1"]
-[ext_resource type="PackedScene" uid="uid://cpkh5vm3hiyxb" path="res://scenes/bullet_spawner.tscn" id="2_xepk4"]
+[ext_resource type="PackedScene" uid="uid://cpkh5vm3hiyxb" path="res://scenes/components/bullet_spawner.tscn" id="2_pr2of"]
+[ext_resource type="Texture2D" uid="uid://dl6mrjpb0bl36" path="res://icon.svg" id="3_qjqhd"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_dgtcb"]
 size = Vector3(0.5, 0.5, 0.5)
@@ -14,12 +15,19 @@ collision_layer = 4
 script = ExtResource("1_77ic1")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("BoxMesh_dgtcb")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_6jsf0")
 
-[node name="BulletSpawner" parent="." instance=ExtResource("2_xepk4")]
+[node name="BulletSpawner" parent="." instance=ExtResource("2_pr2of")]
 wait_time = 1.0
 bullet_type = 1
 speed = 5.0
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.38, 0, 0, 0, 0.38, 0, 0, 0, 0.38, 0, 0, 0)
+billboard = 1
+texture_filter = 0
+texture = ExtResource("3_qjqhd")
