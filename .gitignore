@@ -1,4 +1,6 @@
 .direnv/
 .envrc
+.env
 result
 build/
+bin/
