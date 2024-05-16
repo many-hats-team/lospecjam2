@@ -1,6 +1,8 @@
 shader_type spatial;
 render_mode unshaded;
 
+#include "common.gdshaderinc"
+
 const float total_width_m = 200.0;
 const float center_m = 0.5 * total_width_m;
 const float road_width_m = 4.0;
@@ -8,9 +10,6 @@ const float road_section_length_m = 4.0;
 const float centerline_width_m = 0.1;
 const float centerline_length_m = 3.0;
 const float centerline_gap_length_m = 7.0;
-const float road_falloff_threshold_m = 5.0;
-const float road_falloff_rate = 0.001;
-
 const float speed_mps = 30.0;
 
 uniform vec3 color_offroad : source_color;
@@ -41,26 +40,7 @@ float road_offset() {
 }
 
 void vertex() {
-	if (VERTEX.z < -road_falloff_threshold_m) {
-		float x = -road_falloff_threshold_m - VERTEX.z;
-		VERTEX.y -= road_falloff_rate*x*x;
-	}
-}
-
-vec3 dither(vec4 fragcoord, vec3 a, vec3 b, int weight) {
-	//switch (int(weight * 5.0)) {
-	switch (weight) {
-		case 0:
-			return a;
-		case 1:
-			return mod(fragcoord.x, 2.0) + mod(fragcoord.y, 2.0) < 3.0 ? a : b;
-		case 2:
-			return mod(fragcoord.x + fragcoord.y, 2.0) < 1.0 ? a : b;
-		case 3:
-			return mod(fragcoord.x, 2.0) + mod(fragcoord.y, 2.0) >= 3.0 ? a : b;
-		default:
-			return b;
-	}
+	VERTEX = falloff(VERTEX, MODEL_MATRIX);
 }
 
 void fragment() {

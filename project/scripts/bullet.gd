@@ -1,8 +1,12 @@
-extends Node3D
+extends MeshInstance3D
+
+const SHRINK_TIME_S := 1.0
 
 var velocity: Vector3
+var ground_height: float
 
 @onready var raycast := %Raycast3D as RayCast3D
+@onready var radius: float = mesh.radius
 
 func setup(pos: Vector3, vel: Vector3, is_enemy_bullet: bool) -> void:
 	position = pos
@@ -16,12 +20,10 @@ func setup(pos: Vector3, vel: Vector3, is_enemy_bullet: bool) -> void:
 
 func _ready() -> void:
 	assert(raycast)
-
-func _process(delta: float) -> void:
-	position += velocity * delta
+	assert(radius > 0.0)
 
 func _physics_process(delta: float) -> void:
-	raycast.target_position = velocity * delta + velocity.normalized() * scale.x
+	raycast.target_position = velocity * delta + velocity.normalized() * radius
 	var collider := raycast.get_collider()
 	if collider:
 		queue_free()
@@ -29,5 +31,10 @@ func _physics_process(delta: float) -> void:
 		if hb:
 			hb.hit()
 
+	position += velocity * delta
+
 func _on_death_timer_timeout() -> void:
+	#var tw := create_tween()
+	#tw.tween_property(self, "scale", Vector3.ZERO, SHRINK_TIME_S)
+	#await tw.finished
 	queue_free()

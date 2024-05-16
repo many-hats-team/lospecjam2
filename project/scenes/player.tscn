@@ -55,7 +55,10 @@ image_right = ExtResource("4_h6qmj")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_stm2o")
 
-[node name="BulletSpawner" parent="." instance=ExtResource("2_guhum")]
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.294449)
+
+[node name="BulletSpawner" parent="Node3D" instance=ExtResource("2_guhum")]
 wait_time = 0.1
 speed = 20.0
 offset = 0.1
