@@ -8,6 +8,8 @@ const float road_section_length_m = 4.0;
 const float centerline_width_m = 0.1;
 const float centerline_length_m = 3.0;
 const float centerline_gap_length_m = 7.0;
+const float road_falloff_threshold_m = 5.0;
+const float road_falloff_rate = 0.001;
 
 const float speed_mps = 30.0;
 
@@ -34,11 +36,15 @@ bool is_unit_within_centered(float x, float center, float width) {
 	return x >= center_unit - half_w_unit && x < center_unit + half_w_unit;
 }
 
-float time_offset() {
+float road_offset() {
 	return - TIME * (speed_mps / total_width_m);
 }
 
 void vertex() {
+	if (VERTEX.z < -road_falloff_threshold_m) {
+		float x = -road_falloff_threshold_m - VERTEX.z;
+		VERTEX.y -= road_falloff_rate*x*x;
+	}
 }
 
 vec3 dither(vec4 fragcoord, vec3 a, vec3 b, int weight) {
@@ -62,7 +68,7 @@ void fragment() {
 		if (
 			is_unit_within_centered(UV.x, center_m, centerline_width_m)
 			&& is_unit_within(
-				mod(UV.y + time_offset(), to_unit(centerline_length_m + centerline_gap_length_m)),
+				mod(UV.y + road_offset(), to_unit(centerline_length_m + centerline_gap_length_m)),
 				0.0,
 				centerline_length_m
 			)
@@ -70,7 +76,7 @@ void fragment() {
 			ALBEDO = color_centerline;
 		} else if (
 			is_unit_within(
-				mod(UV.y + time_offset(), to_unit(road_section_length_m * 2.0)),
+				mod(UV.y + road_offset(), to_unit(road_section_length_m * 2.0)),
 				0.0,
 				road_section_length_m
 			)
@@ -83,6 +89,5 @@ void fragment() {
 	} else {
 		ALBEDO = color_offroad;
 	}
-
 
 }

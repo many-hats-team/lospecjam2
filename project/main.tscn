@@ -1,6 +1,5 @@
-[gd_scene load_steps=12 format=3 uid="uid://cahesrp5r3fya"]
+[gd_scene load_steps=9 format=3 uid="uid://cahesrp5r3fya"]
 
-[ext_resource type="Texture2D" uid="uid://dab0txvnv5ig2" path="res://assets/road.png" id="1_di5b1"]
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_mh1ta"]
 [ext_resource type="PackedScene" uid="uid://c8at0t7xwevmr" path="res://scenes/player.tscn" id="2_15ibv"]
 [ext_resource type="Script" path="res://scripts/camera_follow.gd" id="2_eimwo"]
@@ -8,14 +7,6 @@
 [ext_resource type="Script" path="res://scripts/despawner.gd" id="6_jxhrw"]
 [ext_resource type="PackedScene" uid="uid://dpolfsh15rvao" path="res://scenes/components/enemy_spawner.tscn" id="6_shj7u"]
 [ext_resource type="PackedScene" uid="uid://008g4gtbtf0n" path="res://scenes/road.tscn" id="8_sxc8i"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pbs84"]
-shading_mode = 0
-albedo_texture = ExtResource("1_di5b1")
-texture_filter = 0
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_j8p7f"]
-material = SubResource("StandardMaterial3D_pbs84")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cdsm1"]
 size = Vector3(13.0049, 2.03235, 1.17163)
@@ -52,10 +43,7 @@ text = "Hello, World!
 [node name="World" type="Node3D" parent="."]
 script = ExtResource("1_mh1ta")
 
-[node name="Road" type="MeshInstance3D" parent="World"]
-transform = Transform3D(6, 0, 0, 0, 1, 0, 0, 0, 4, 0, 0, 0)
-visible = false
-mesh = SubResource("PlaneMesh_j8p7f")
+[node name="Road" parent="World" instance=ExtResource("8_sxc8i")]
 
 [node name="Camera3D" type="Camera3D" parent="World"]
 transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 2.5, 6)
@@ -96,5 +84,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.309434, -4.40665)
 wait_time = 2.0
 speed = 2.0
 offset = 2.0
-
-[node name="Road2" parent="World" instance=ExtResource("8_sxc8i")]
