@@ -59,7 +59,7 @@ collision_mask = 37
 transform = Transform3D(0.965926, -1.13133e-08, 0.258819, -0.25, 0.258819, 0.933013, -0.0669873, -0.965926, 0.25, 0, 4, 0)
 
 [node name="Boss" parent="World" instance=ExtResource("3_wdbhd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.270555, -3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.270555, -6.09399)
 
 [node name="Barrier" type="StaticBody3D" parent="World"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
@@ -81,9 +81,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0161133, 0.516174, -1.7057
 shape = SubResource("BoxShape3D_cdsm1")
 
 [node name="EnemySpawnPoint" type="Marker3D" parent="World"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.309434, -4.40665)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, -20)
 
 [node name="EnemySpawner" parent="World/EnemySpawnPoint" instance=ExtResource("6_shj7u")]
 wait_time = 2.0
-speed = 2.0
+speed = 4.0
 offset = 2.0

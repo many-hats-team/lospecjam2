@@ -13,7 +13,7 @@ shader_parameter/color_centerline = Color(0.490196, 0.490196, 0.639216, 1)
 [sub_resource type="PlaneMesh" id="PlaneMesh_km5t6"]
 material = SubResource("ShaderMaterial_4od0w")
 size = Vector2(200, 200)
-subdivide_depth = 40
+subdivide_depth = 100
 center_offset = Vector3(0, 0, -70)
 
 [node name="Road" type="Node3D"]

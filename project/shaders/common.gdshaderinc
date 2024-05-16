@@ -1,6 +1,6 @@
 
 const float road_falloff_threshold_m = 5.0;
-const float road_falloff_rate = 0.001;
+const float road_falloff_rate = 0.008;
 
 vec3 falloff(vec3 vertex, mat4 model_matrix) {
 	vec4 v = model_matrix * vec4(vertex, 1.0);
