@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode blend_mix,depth_draw_opaque,cull_back,diffuse_burley,specular_schlick_ggx,unshaded;
+render_mode unshaded;
 
 #include "common.gdshaderinc"
 
@@ -70,4 +70,7 @@ void fragment() {
 		ALBEDO = color_offroad;
 	}
 
+  RIM = 0.0;
+  METALLIC = 0.0;
+  ROUGHNESS = 0.0;
 }

@@ -5,8 +5,8 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4od0w"]
 render_priority = 0
 shader = ExtResource("1_2h6e6")
-shader_parameter/color_offroad = Color(0.14902, 0.0392157, 0.203922, 1)
-shader_parameter/color_road = Color(0.14902, 0.0392157, 0.203922, 1)
+shader_parameter/color_offroad = Color(0.152941, 0.0588235, 0.207843, 1)
+shader_parameter/color_road = Color(0.152941, 0.0588235, 0.207843, 1)
 shader_parameter/color_road2 = Color(0, 0, 0, 1)
 shader_parameter/color_centerline = Color(0.490196, 0.490196, 0.639216, 1)
 
