@@ -4,10 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://cpkh5vm3hiyxb" path="res://scenes/components/bullet_spawner.tscn" id="2_pr2of"]
 [ext_resource type="PackedScene" uid="uid://gcso6pn2lfot" path="res://scenes/sprite.tscn" id="3_agvp1"]
 [ext_resource type="Shader" path="res://shaders/sprite_shader.gdshader" id="4_dc720"]
-[ext_resource type="Texture2D" uid="uid://cheieh1gokv2j" path="res://assets/enemy.png" id="5_thtv5"]
+[ext_resource type="Texture2D" uid="uid://efsv2sqdsmlm" path="res://assets/cars.png" id="5_memss"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6jsf0"]
-size = Vector3(0.5, 0.5, 0.5)
+size = Vector3(1, 0.5, 0.5)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q1rys"]
 resource_local_to_scene = true
@@ -21,12 +21,12 @@ shader_parameter/metallic_texture_channel = null
 shader_parameter/specular = 0.5
 shader_parameter/metallic = 0.0
 shader_parameter/uv1_scale = Vector3(1, 1, 1)
-shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv1_offset = Vector3(168, 60, 0)
 shader_parameter/uv2_scale = Vector3(1, 1, 1)
 shader_parameter/uv2_offset = Vector3(0, 0, 0)
 shader_parameter/flash = false
 shader_parameter/flash_color = Vector3(1, 1, 1)
-shader_parameter/texture_albedo = ExtResource("5_thtv5")
+shader_parameter/texture_albedo = ExtResource("5_memss")
 
 [node name="Enemy" type="CharacterBody3D"]
 collision_layer = 4
@@ -44,3 +44,9 @@ speed = 5.0
 [node name="Sprite" parent="." instance=ExtResource("3_agvp1")]
 unique_name_in_owner = true
 material_override = SubResource("ShaderMaterial_q1rys")
+texture = ExtResource("5_memss")
+hframes = 2
+vframes = 10
+frame = 4
+frame_start = 4
+frame_end = 5

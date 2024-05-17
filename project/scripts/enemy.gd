@@ -13,6 +13,9 @@ func _ready() -> void:
 	assert(sprite)
 	HitBox.new(self, _on_hit)
 
+	sprite.frame_start = posmod(randi(), 5) * 4
+	sprite.frame_end = sprite.frame_start + 1
+
 
 func _physics_process(_delta: float) -> void:
 	move_and_slide()

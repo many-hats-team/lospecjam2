@@ -10,6 +10,15 @@ const FLASH_DURATION_FRAMES := 2
 		if timer:
 			timer.wait_time = value
 
+@export var frame_start := 0:
+	set(value):
+		frame_start = value
+		frame = max(frame, value)
+@export var frame_end := 1:
+	set(value):
+		frame_end = value
+		frame = min(frame, value)
+
 @onready var timer := %Timer as Timer
 
 var _is_flashing := false
@@ -17,7 +26,9 @@ var _is_flashing := false
 func _ready() -> void:
 	assert(timer)
 	frame_duration_s = frame_duration_s
-	timer.timeout.connect(_on_timer_timeout)
+	timer.timeout.connect(next_frame)
+
+	frame = frame_start
 
 	_apply_texture()
 	texture_changed.connect(_apply_texture)
@@ -48,5 +59,8 @@ func hit_flash() -> void:
 		_is_flashing = false
 
 
-func _on_timer_timeout() -> void:
-	frame = posmod(frame + 1, vframes * hframes)
+func next_frame() -> void:
+	var n = frame + 1
+	if n > frame_end:
+		n = frame_start
+	frame = n
