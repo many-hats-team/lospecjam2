@@ -10,12 +10,16 @@ const float road_section_length_m = 4.0;
 const float centerline_width_m = 0.1;
 const float centerline_length_m = 3.0;
 const float centerline_gap_length_m = 7.0;
+const float shoulderline_width_m = 0.1;
+const float shoulderline_gap_m = 0.1;
+
 const float speed_mps = 30.0;
 
 uniform vec3 color_offroad : source_color;
 uniform vec3 color_road : source_color;
 uniform vec3 color_road2 : source_color;
-uniform vec3 color_centerline : source_color;
+uniform vec3 color_whiteline : source_color;
+uniform vec3 color_yellowline : source_color;
 
 float half_unit(float x) {
 	return 0.5 * road_width_m / total_width_m;
@@ -25,8 +29,8 @@ float to_unit(float m) {
 	return m / total_width_m;
 }
 
-bool is_unit_within(float x, float lo, float hi) {
-	return x >= lo / total_width_m && x < hi / total_width_m;
+bool is_unit_within(float x, float start, float width) {
+	return x >= start / total_width_m && x < (start + width) / total_width_m;
 }
 
 bool is_unit_within_centered(float x, float center, float width) {
@@ -44,7 +48,11 @@ void vertex() {
 }
 
 void fragment() {
-	if (is_unit_within_centered(UV.x, center_m, road_width_m)) {
+	if (is_unit_within(UV.x, center_m + road_width_m * 0.5 - shoulderline_gap_m - shoulderline_width_m, shoulderline_width_m)) {
+		ALBEDO = color_whiteline;
+	} else if (is_unit_within(UV.x, center_m - road_width_m * 0.5 + shoulderline_gap_m, shoulderline_width_m)) {
+		ALBEDO = color_yellowline;
+	} else if (is_unit_within_centered(UV.x, center_m, road_width_m)) {
 		if (
 			is_unit_within_centered(UV.x, center_m, centerline_width_m)
 			&& is_unit_within(
@@ -53,7 +61,7 @@ void fragment() {
 				centerline_length_m
 			)
 		) {
-			ALBEDO = color_centerline;
+			ALBEDO = color_whiteline;
 		} else if (
 			is_unit_within(
 				mod(UV.y + road_offset(), to_unit(road_section_length_m * 2.0)),
