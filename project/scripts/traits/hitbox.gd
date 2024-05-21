@@ -7,11 +7,11 @@ static func trait_name() -> StringName:
 static func trait_get(obj: Object) -> HitBox:
 	return Trait._trait_get(obj, trait_name()) as HitBox
 
-var _hit: Callable
+var _on_hit: Callable
 
-func _init(obj: Object, hitFn: Callable) -> void:
+func _init(obj: Object, on_hit: Callable) -> void:
 	super(obj)
-	_hit = hitFn
+	_on_hit = on_hit
 
 func hit() -> void:
-	_hit.call()
+	_on_hit.call()

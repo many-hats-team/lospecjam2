@@ -11,7 +11,7 @@ var health := 11
 
 func _ready() -> void:
 	assert(sprite)
-	HitBox.new(self, _on_hit)
+	Mortal.new(self, 11, sprite, _on_death)
 
 	sprite.frame_start = posmod(randi(), 5) * 4
 	sprite.frame_end = sprite.frame_start + 1
@@ -26,10 +26,5 @@ func setup(pos: Vector3, vel: Vector3) -> void:
 	velocity = vel
 
 
-func _on_hit() -> void:
-	health -= 1
-	if health <= 0:
-		queue_free()
-		return
-
-	sprite.hit_flash()
+func _on_death() -> void:
+	queue_free()
