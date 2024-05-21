@@ -1,20 +1,39 @@
-[gd_scene load_steps=5 format=3 uid="uid://d1m14kpdnhtta"]
+[gd_scene load_steps=8 format=3 uid="uid://d1m14kpdnhtta"]
 
 [ext_resource type="Script" path="res://scripts/protoboss.gd" id="1_1sbx5"]
 [ext_resource type="PackedScene" uid="uid://cpkh5vm3hiyxb" path="res://scenes/components/bullet_spawner.tscn" id="2_us7nl"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_kgam4"]
+[ext_resource type="PackedScene" uid="uid://gcso6pn2lfot" path="res://scenes/sprite.tscn" id="3_c86hl"]
+[ext_resource type="Texture2D" uid="uid://cr8o8otby828f" path="res://assets/boss-sheet.png" id="3_e12t6"]
+[ext_resource type="Shader" path="res://shaders/sprite_shader.gdshader" id="4_v72ui"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_x364u"]
+size = Vector3(1.46484, 1, 0.351318)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rr2qj"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("4_v72ui")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/alpha_scissor_threshold = 0.5
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/flash = false
+shader_parameter/flash_color = Vector3(1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("3_e12t6")
 
 [node name="ProtoBoss" type="CharacterBody3D"]
 collision_layer = 4
 script = ExtResource("1_1sbx5")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_kgam4")
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.187716)
 shape = SubResource("BoxShape3D_x364u")
 
 [node name="BulletSpawner" parent="." instance=ExtResource("2_us7nl")]
@@ -23,3 +42,11 @@ bullet_type = 1
 speed = 3.0
 spread = 0.2
 count = 3
+
+[node name="Sprite" parent="." instance=ExtResource("3_c86hl")]
+unique_name_in_owner = true
+material_override = SubResource("ShaderMaterial_rr2qj")
+offset = Vector2(0, 64)
+texture = ExtResource("3_e12t6")
+hframes = 4
+frame_end = 3
