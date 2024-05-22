@@ -28,3 +28,4 @@ func setup(pos: Vector3, vel: Vector3) -> void:
 
 func _on_death() -> void:
 	queue_free()
+	mgmt.add_score(100)

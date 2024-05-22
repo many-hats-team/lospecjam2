@@ -112,7 +112,7 @@ wait_time = 2.0
 speed = 4.0
 offset = 2.0
 
-[node name="UI" type="Node2D" parent="."]
-position = Vector2(151, 0)
+[node name="UI" type="CanvasLayer" parent="."]
 
 [node name="PlayerUI" parent="UI" instance=ExtResource("12_2x702")]
+position = Vector2(151, 0)

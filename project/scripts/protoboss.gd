@@ -20,3 +20,4 @@ func _physics_process(_delta: float) -> void:
 
 func _on_death() -> void:
 	queue_free()
+	mgmt.add_score(10000)
