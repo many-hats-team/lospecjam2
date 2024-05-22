@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cahesrp5r3fya"]
+[gd_scene load_steps=15 format=3 uid="uid://cahesrp5r3fya"]
 
 [ext_resource type="Texture2D" uid="uid://dp8bo4bps41x6" path="res://assets/background-layer1.png" id="1_aous5"]
 [ext_resource type="Texture2D" uid="uid://b7piee4tst5c6" path="res://assets/background-layer2.png" id="1_f8hqw"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://scripts/despawner.gd" id="6_jxhrw"]
 [ext_resource type="PackedScene" uid="uid://dpolfsh15rvao" path="res://scenes/components/enemy_spawner.tscn" id="6_shj7u"]
 [ext_resource type="PackedScene" uid="uid://008g4gtbtf0n" path="res://scenes/road.tscn" id="8_sxc8i"]
+[ext_resource type="PackedScene" uid="uid://c0sxx3nwn2xey" path="res://scenes/ui/player_ui.tscn" id="12_2x702"]
 
 [sub_resource type="Environment" id="Environment_2xhke"]
 background_mode = 3
@@ -110,3 +111,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, -20)
 wait_time = 2.0
 speed = 4.0
 offset = 2.0
+
+[node name="UI" type="Node2D" parent="."]
+position = Vector2(151, 0)
+
+[node name="PlayerUI" parent="UI" instance=ExtResource("12_2x702")]

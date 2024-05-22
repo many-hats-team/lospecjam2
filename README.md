@@ -5,10 +5,6 @@ Title TBD
 ## TODO
 
 Player
-- Add death animation:
-    - Pause and camera shake
-    - Fall off screen
-    - Return on screen with I-frames
 - Add healthbar
 - sfx
 

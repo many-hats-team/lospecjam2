@@ -62,6 +62,8 @@ func _on_hit() -> void:
 	if is_in_hit_animation:
 		return
 
+	mgmt.add_life(-1)
+
 	is_in_hit_animation = true
 	is_input_enabled = false
 	bullet_timer.stop()

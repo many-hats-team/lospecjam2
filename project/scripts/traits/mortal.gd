@@ -29,6 +29,7 @@ func _on_hit() -> void:
 	if health <= 0:
 		return
 
+	mgmt.add_score(1)
 	sprite.hit_flash()
 
 	health -= 1
