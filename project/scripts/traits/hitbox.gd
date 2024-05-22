@@ -10,6 +10,7 @@ static func trait_get(obj: Object) -> HitBox:
 var _on_hit: Callable
 
 func _init(obj: Object, on_hit: Callable) -> void:
+	assert(on_hit)
 	super(obj)
 	_on_hit = on_hit
 

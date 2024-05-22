@@ -17,6 +17,8 @@ func _init(
 	sprite: MySprite,
 	on_death: Callable,
 ) -> void:
+	assert(sprite)
+	assert(on_death)
 	super(obj)
 	self.health = health
 	self.sprite = sprite
@@ -24,7 +26,7 @@ func _init(
 	HitBox.new(obj, _on_hit)
 
 func _on_hit() -> void:
-	if health < 0:
+	if health <= 0:
 		return
 
 	sprite.hit_flash()

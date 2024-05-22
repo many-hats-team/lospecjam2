@@ -22,6 +22,7 @@ const FLASH_DURATION_FRAMES := 2
 @onready var timer := %Timer as Timer
 
 var _is_flashing := false
+var _is_blinking := false
 
 func _ready() -> void:
 	assert(timer)
@@ -40,21 +41,37 @@ func _apply_texture():
 		return
 
 	var shader_material : ShaderMaterial = material_override
-	shader_material.set_shader_parameter("texture_albedo", texture)
-	shader_material.set_shader_parameter("uv1_offset", Vector3(
+	shader_material.set_shader_parameter(&"texture_albedo", texture)
+	shader_material.set_shader_parameter(&"uv1_offset", Vector3(
 		posmod(frame, vframes) * (texture.get_width() / hframes),
 		(frame / hframes) * (texture.get_height() / vframes),
 		0.0
 	))
 
 
+func blink(duration: float) -> void:
+	if not _is_blinking:
+		_is_blinking = true
+		var timer := get_tree().create_timer(duration)
+		while timer.time_left > 0.0:
+			visible = false
+			await mgmt.wait_phys_frames(FLASH_DURATION_FRAMES)
+			visible = true
+			await mgmt.wait_phys_frames(FLASH_DURATION_FRAMES)
+		_is_blinking = false
+
+
+func set_flash(enabled: bool) -> void:
+	var shader_material : ShaderMaterial = material_override
+	shader_material.set_shader_parameter(&"flash", enabled)
+
+
 func hit_flash() -> void:
 	if not _is_flashing:
 		_is_flashing = true
-		var shader_material : ShaderMaterial = material_override
-		shader_material.set_shader_parameter("flash", true)
+		set_flash(true)
 		await mgmt.wait_phys_frames(FLASH_DURATION_FRAMES)
-		shader_material.set_shader_parameter("flash", false)
+		set_flash(false)
 		await mgmt.wait_phys_frames(FLASH_DURATION_FRAMES)
 		_is_flashing = false
 

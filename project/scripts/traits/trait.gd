@@ -21,6 +21,7 @@ static func _trait_get(obj: Object, name: StringName) -> Trait:
 	return obj.get_meta(name)
 
 func _init(obj: Object) -> void:
+	assert(obj)
 	var n := trait_name()
 	assert(not obj.has_meta(n), "Duplicate trait '%s' on %s" % [n, obj])
 	obj.set_meta(n, self)

@@ -12,8 +12,9 @@ const float centerline_length_m = 3.0;
 const float centerline_gap_length_m = 7.0;
 const float shoulderline_width_m = 0.1;
 const float shoulderline_gap_m = 0.1;
+const float speed = 0.15;
 
-const float speed_mps = 30.0;
+uniform bool is_paused = false;
 
 uniform vec3 color_offroad : source_color;
 uniform vec3 color_road : source_color;
@@ -40,7 +41,7 @@ bool is_unit_within_centered(float x, float center, float width) {
 }
 
 float road_offset() {
-	return - TIME * (speed_mps / total_width_m);
+	return - TIME * speed;
 }
 
 void vertex() {
@@ -53,7 +54,10 @@ void fragment() {
 	} else if (is_unit_within(UV.x, center_m - road_width_m * 0.5 + shoulderline_gap_m, shoulderline_width_m)) {
 		ALBEDO = color_yellowline;
 	} else if (is_unit_within_centered(UV.x, center_m, road_width_m)) {
-		if (
+		if (is_paused) {
+			// Don't show any animated sections
+			ALBEDO = color_road2;
+		} else if (
 			is_unit_within_centered(UV.x, center_m, centerline_width_m)
 			&& is_unit_within(
 				mod(UV.y + road_offset(), to_unit(centerline_length_m + centerline_gap_length_m)),

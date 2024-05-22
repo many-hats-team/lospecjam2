@@ -1,10 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://008g4gtbtf0n"]
+[gd_scene load_steps=5 format=3 uid="uid://008g4gtbtf0n"]
 
 [ext_resource type="Shader" path="res://shaders/road.gdshader" id="1_2h6e6"]
+[ext_resource type="Script" path="res://scripts/road_mesh.gd" id="2_g45yt"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4od0w"]
 render_priority = 0
 shader = ExtResource("1_2h6e6")
+shader_parameter/is_paused = false
 shader_parameter/color_offroad = Color(0.152941, 0.0588235, 0.207843, 1)
 shader_parameter/color_road = Color(0.152941, 0.0588235, 0.207843, 1)
 shader_parameter/color_road2 = Color(0, 0, 0, 1)
@@ -21,3 +23,4 @@ center_offset = Vector3(0, 0, -70)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_km5t6")
+script = ExtResource("2_g45yt")
