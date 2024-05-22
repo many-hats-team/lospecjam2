@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cahesrp5r3fya"]
+[gd_scene load_steps=18 format=3 uid="uid://cahesrp5r3fya"]
 
 [ext_resource type="Texture2D" uid="uid://dp8bo4bps41x6" path="res://assets/background-layer1.png" id="1_aous5"]
 [ext_resource type="Texture2D" uid="uid://b7piee4tst5c6" path="res://assets/background-layer2.png" id="1_f8hqw"]
@@ -12,12 +12,19 @@
 [ext_resource type="PackedScene" uid="uid://dpolfsh15rvao" path="res://scenes/components/enemy_spawner.tscn" id="6_shj7u"]
 [ext_resource type="PackedScene" uid="uid://008g4gtbtf0n" path="res://scenes/road.tscn" id="8_sxc8i"]
 [ext_resource type="PackedScene" uid="uid://c0sxx3nwn2xey" path="res://scenes/ui/player_ui.tscn" id="12_2x702"]
+[ext_resource type="Shader" path="res://shaders/post.gdshader" id="13_71tef"]
 
 [sub_resource type="Environment" id="Environment_2xhke"]
 background_mode = 3
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cdsm1"]
 size = Vector3(13.0049, 2.03235, 1.17163)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xytw3"]
+shader = ExtResource("13_71tef")
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_2rwes"]
+size = Vector2(256, 224)
 
 [node name="Node" type="Node"]
 
@@ -116,3 +123,10 @@ offset = 2.0
 
 [node name="PlayerUI" parent="UI" instance=ExtResource("12_2x702")]
 position = Vector2(151, 0)
+
+[node name="Post" type="CanvasLayer" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Post"]
+material = SubResource("ShaderMaterial_xytw3")
+texture = SubResource("PlaceholderTexture2D_2rwes")
+centered = false

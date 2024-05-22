@@ -14,6 +14,7 @@
           buildInputs = [
             godot_4
             aseprite
+            python3
           ];
         };
       }
