@@ -1,6 +1,8 @@
 class_name Mortal
 extends Trait
 
+signal health_changed(hp: int, maxhp: int)
+
 static func trait_name() -> StringName:
 	return "Mortal"
 
@@ -8,6 +10,7 @@ static func trait_get(obj: Object) -> Mortal:
 	return Trait._trait_get(obj, trait_name()) as Mortal
 
 var health: int
+var max_health: int
 var sprite: MySprite
 var _on_death: Callable
 
@@ -21,6 +24,7 @@ func _init(
 	assert(on_death)
 	super(obj)
 	self.health = health
+	self.max_health = health
 	self.sprite = sprite
 	self._on_death = on_death
 	HitBox.new(obj, _on_hit)
@@ -35,3 +39,5 @@ func _on_hit() -> void:
 	health -= 1
 	if health <= 0:
 		_on_death.call()
+
+	health_changed.emit(health, max_health)

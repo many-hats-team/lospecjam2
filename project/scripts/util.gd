@@ -11,3 +11,4 @@ static func multidup(sprite: Sprite2D, count: int, offset: float) -> Array[Sprit
 		sprite.position.x += offset
 	out.append(sprite)
 	return out
+

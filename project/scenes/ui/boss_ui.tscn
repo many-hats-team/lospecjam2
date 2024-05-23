@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bklt26gd3x6dy"]
+
+[ext_resource type="Texture2D" uid="uid://be3gfud88y8jp" path="res://assets/boss-ui.png" id="1_7yd3b"]
+[ext_resource type="Script" path="res://scripts/ui/boss_ui.gd" id="1_ikhwn"]
+[ext_resource type="Texture2D" uid="uid://c01pqeobhu360" path="res://assets/boss-ui-pip.png" id="3_byp63"]
+
+[node name="BossUI" type="Node2D"]
+script = ExtResource("1_ikhwn")
+
+[node name="Background" type="Sprite2D" parent="."]
+texture_filter = 1
+texture_repeat = 1
+texture = ExtResource("1_7yd3b")
+centered = false
+
+[node name="Pip" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+texture_filter = 1
+texture_repeat = 1
+position = Vector2(32, 4)
+texture = ExtResource("3_byp63")
+centered = false

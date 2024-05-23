@@ -2,6 +2,9 @@ extends Node
 
 signal paused
 signal unpaused
+signal player_lives_changed(lives: int)
+signal score_changed(score: int)
+signal boss_health_changed(hp: int, maxhp: int)
 
 const TYPICAL_ROAD_SPEED_MPS := 30.0
 
@@ -9,8 +12,9 @@ var road_speed := TYPICAL_ROAD_SPEED_MPS
 
 var world: Node3D
 var player: Player
-var player_ui: PlayerUi
 
+var player_lives := 8
+var score := 0
 
 func wait_phys_frames(n: int) -> void:
 	for _i in range(n):
@@ -28,10 +32,10 @@ func unpause() -> void:
 
 
 func add_score(x: int) -> void:
-	if player_ui:
-		player_ui.score += x
+	score += x
+	score_changed.emit(score)
 
 
 func add_life(x: int) -> void:
-	if player_ui:
-		player_ui.lives += x
+	player_lives += x
+	player_lives_changed.emit(player_lives)
