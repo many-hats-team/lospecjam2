@@ -6,15 +6,21 @@ signal player_lives_changed(lives: int)
 signal score_changed(score: int)
 signal boss_health_changed(hp: int, maxhp: int)
 
-const TYPICAL_ROAD_SPEED_MPS := 30.0
-
-var road_speed := TYPICAL_ROAD_SPEED_MPS
-
-var world: Node3D
-var player: Player
-
 var player_lives := 8
 var score := 0
+
+var _world_ref: WeakRef
+func set_world(world: Node3D) -> void:
+	_world_ref = weakref(world)
+func get_world() -> Node3D:
+	return _world_ref.get_ref()
+
+var _player_ref: WeakRef
+func set_player(player: Player) -> void:
+	_player_ref = weakref(player)
+func get_player() -> Player:
+	return _player_ref.get_ref()
+
 
 func wait_phys_frames(n: int) -> void:
 	for _i in range(n):

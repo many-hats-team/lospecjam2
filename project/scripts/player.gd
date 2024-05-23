@@ -33,7 +33,7 @@ var is_in_hit_animation := false
 func _ready() -> void:
 	assert(sprite)
 	HitBox.new(self, _on_hit)
-	mgmt.player = self
+	mgmt.set_player(self)
 	sprite.texture = texture_center
 
 

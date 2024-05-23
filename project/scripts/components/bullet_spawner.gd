@@ -24,14 +24,15 @@ func _ready() -> void:
 func _shoot() -> void:
 	var is_enemy_bullet := false
 	var direction := Vector3.ZERO
+	var player := mgmt.get_player()
 
 	match bullet_type:
 		BulletType.PLAYER_FORWARD:
 			direction = Vector3.FORWARD
 		BulletType.ENEMY_TARGET_PLAYER:
 			is_enemy_bullet = true
-			if mgmt.player:
-				direction = (mgmt.player.position - source_node.position).normalized()
+			if player:
+				direction = (player.position - source_node.position).normalized()
 
 	if direction == Vector3.ZERO:
 		return
@@ -54,8 +55,9 @@ func _shoot() -> void:
 
 
 func _spawn_bullet(position: Vector3, velocity: Vector3, is_enemy_bullet: bool) -> void:
-	if mgmt.world:
+	var world := mgmt.get_world()
+	if world:
 		var bullet := BulletScene.instantiate()
-		mgmt.world.add_child(bullet)
+		world.add_child(bullet)
 		velocity.y = 0
 		bullet.setup(position, velocity, is_enemy_bullet)

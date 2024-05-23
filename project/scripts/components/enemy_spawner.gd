@@ -15,12 +15,11 @@ func _ready() -> void:
 
 
 func _on_timeout() -> void:
-	if not mgmt.world:
-		return
-
-	var enemy := EnemyScene.instantiate()
-	mgmt.world.add_child(enemy)
-	enemy.setup(
-		source_node.global_position + Vector3(rng.randf_range(-offset, offset), 0, 0),
-		Vector3.BACK * speed
-	)
+	var world := mgmt.get_world()
+	if world:
+		var enemy := EnemyScene.instantiate()
+		world.add_child(enemy)
+		enemy.setup(
+			source_node.global_position + Vector3(rng.randf_range(-offset, offset), 0, 0),
+			Vector3.BACK * speed
+		)
