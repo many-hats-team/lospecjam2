@@ -1,13 +1,24 @@
-[gd_scene load_steps=8 format=3 uid="uid://d1m14kpdnhtta"]
+[gd_scene load_steps=10 format=3 uid="uid://d1m14kpdnhtta"]
 
 [ext_resource type="Script" path="res://scripts/protoboss.gd" id="1_1sbx5"]
-[ext_resource type="PackedScene" uid="uid://cpkh5vm3hiyxb" path="res://scenes/components/bullet_spawner.tscn" id="2_us7nl"]
 [ext_resource type="PackedScene" uid="uid://gcso6pn2lfot" path="res://scenes/sprite.tscn" id="3_c86hl"]
+[ext_resource type="PackedScene" uid="uid://cuef00urlja7j" path="res://scenes/weapon.tscn" id="3_dluwa"]
+[ext_resource type="Script" path="res://scripts/resources/weapon_resource.gd" id="3_uiy0d"]
 [ext_resource type="Shader" path="res://shaders/sprite_shader.gdshader" id="4_v72ui"]
 [ext_resource type="Texture2D" uid="uid://cr8o8otby828f" path="res://assets/boss-Sheet.png" id="5_1f4wd"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_x364u"]
 size = Vector3(1.46484, 1, 0.351318)
+
+[sub_resource type="Resource" id="Resource_toi5k"]
+script = ExtResource("3_uiy0d")
+mesh_kind = 1
+aim = 1
+speed = 3.0
+spread = 0.3
+offset = 0.0
+count = 5
+reload_time = 0.5
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rr2qj"]
 resource_local_to_scene = true
@@ -36,12 +47,10 @@ script = ExtResource("1_1sbx5")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.187716)
 shape = SubResource("BoxShape3D_x364u")
 
-[node name="BulletSpawner" parent="." instance=ExtResource("2_us7nl")]
-wait_time = 0.6
-bullet_type = 1
-speed = 3.0
-spread = 0.2
-count = 3
+[node name="Weapon" parent="." instance=ExtResource("3_dluwa")]
+weapon = SubResource("Resource_toi5k")
+is_enemy = true
+auto_fire = true
 
 [node name="Sprite" parent="." instance=ExtResource("3_c86hl")]
 unique_name_in_owner = true

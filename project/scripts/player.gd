@@ -2,6 +2,7 @@ class_name Player
 extends CharacterBody3D
 
 const BulletScene := preload("res://scenes/bullet.tscn")
+const Weapon := preload("res://scripts/weapon.gd")
 
 const MOVE_INPUT_SCALE := Vector2(3.0, 3.0)
 const MOVE_LERP_BASE := 0.3
@@ -25,13 +26,14 @@ const IFRAME_DURATION_S := 2.0
 @onready var texture_right := ImageTexture.create_from_image(image_right)
 
 @onready var sprite := %Sprite as MySprite
-@onready var bullet_timer := %BulletSpawner as Timer
+@onready var weapon := %Weapon as Weapon
 
 var is_input_enabled := true
 var is_in_hit_animation := false
 
 func _ready() -> void:
 	assert(sprite)
+	assert(weapon)
 	HitBox.new(self, _on_hit)
 	mgmt.set_player(self)
 	sprite.texture = texture_center
@@ -66,7 +68,7 @@ func _on_hit() -> void:
 
 	is_in_hit_animation = true
 	is_input_enabled = false
-	bullet_timer.stop()
+	weapon.stop()
 
 	# Short pause and flash
 	sprite.set_flash(true)
@@ -86,7 +88,7 @@ func _on_hit() -> void:
 	await tween.finished
 
 	# Regain control
-	bullet_timer.start()
+	weapon.start()
 	is_input_enabled = true
 
 	# I-frames

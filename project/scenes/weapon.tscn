@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://cuef00urlja7j"]
+
+[ext_resource type="Script" path="res://scripts/weapon.gd" id="1_ak5k8"]
+
+[node name="Weapon" type="Marker3D"]
+script = ExtResource("1_ak5k8")
+is_enemy = null
+auto_fire = null
+
+[node name="Timer" type="Timer" parent="."]
+unique_name_in_owner = true
+process_callback = 0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

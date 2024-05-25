@@ -11,12 +11,16 @@ const BulletScene := preload("res://scenes/bullet.tscn")
 @onready var trait_mortal := Mortal.new(self, 1000, sprite, _on_death)
 
 
+var _t_ms := 0
+
+
 func _ready() -> void:
 	trait_mortal.health_changed.connect(_on_health_changed)
 
 
-func _physics_process(_delta: float) -> void:
-	position.x = move_range * sin(Time.get_ticks_msec() * speed)
+func _physics_process(delta: float) -> void:
+	_t_ms += int(delta * 1000.0)
+	position.x = move_range * sin(_t_ms * speed)
 
 
 func _on_health_changed(hp: int, maxhp: int) -> void:

@@ -14,8 +14,8 @@ var ground_height: float
 
 @onready var raycast := %Raycast3D as RayCast3D
 
-func setup(pos: Vector3, vel: Vector3, is_enemy_bullet: bool, mesh_: Mesh) -> void:
-	position = pos
+func setup(gpos: Vector3, vel: Vector3, is_enemy_bullet: bool, mesh_: Mesh) -> void:
+	global_position = gpos
 	velocity = vel
 
 	if is_enemy_bullet:

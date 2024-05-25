@@ -1,13 +1,24 @@
-[gd_scene load_steps=8 format=3 uid="uid://bu3dgfpefsqbi"]
+[gd_scene load_steps=10 format=3 uid="uid://bu3dgfpefsqbi"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_77ic1"]
-[ext_resource type="PackedScene" uid="uid://cpkh5vm3hiyxb" path="res://scenes/components/bullet_spawner.tscn" id="2_pr2of"]
+[ext_resource type="PackedScene" uid="uid://cuef00urlja7j" path="res://scenes/weapon.tscn" id="2_fa5y7"]
 [ext_resource type="PackedScene" uid="uid://gcso6pn2lfot" path="res://scenes/sprite.tscn" id="3_agvp1"]
+[ext_resource type="Script" path="res://scripts/resources/weapon_resource.gd" id="3_ivteq"]
 [ext_resource type="Shader" path="res://shaders/sprite_shader.gdshader" id="4_dc720"]
 [ext_resource type="Texture2D" uid="uid://efsv2sqdsmlm" path="res://assets/cars.png" id="5_memss"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6jsf0"]
 size = Vector3(1, 0.5, 0.5)
+
+[sub_resource type="Resource" id="Resource_2sepf"]
+script = ExtResource("3_ivteq")
+mesh_kind = 0
+aim = 1
+speed = 5.0
+spread = 0.0
+offset = 0.0
+count = 1
+reload_time = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q1rys"]
 resource_local_to_scene = true
@@ -36,10 +47,10 @@ script = ExtResource("1_77ic1")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_6jsf0")
 
-[node name="BulletSpawner" parent="." instance=ExtResource("2_pr2of")]
-wait_time = 1.0
-bullet_type = 1
-speed = 5.0
+[node name="Weapon" parent="." instance=ExtResource("2_fa5y7")]
+weapon = SubResource("Resource_2sepf")
+is_enemy = true
+auto_fire = true
 
 [node name="Sprite" parent="." instance=ExtResource("3_agvp1")]
 unique_name_in_owner = true

@@ -5,6 +5,7 @@ const BulletScene := preload("res://scenes/bullet.tscn")
 enum BulletType {
 	PLAYER_FORWARD,
 	ENEMY_TARGET_PLAYER,
+	ENEMY_FORWARD,
 }
 
 @export var bullet_type: BulletType = BulletType.PLAYER_FORWARD
@@ -29,10 +30,15 @@ func _shoot() -> void:
 	match bullet_type:
 		BulletType.PLAYER_FORWARD:
 			direction = Vector3.FORWARD
+		BulletType.ENEMY_FORWARD:
+			is_enemy_bullet = true
+			direction = Vector3.BACK
 		BulletType.ENEMY_TARGET_PLAYER:
 			is_enemy_bullet = true
 			if player:
 				direction = (player.position - source_node.position).normalized()
+		_:
+			assert(false)
 
 	if direction == Vector3.ZERO:
 		return
@@ -43,12 +49,14 @@ func _shoot() -> void:
 	if count == 1:
 		_spawn_bullet(position, velocity, is_enemy_bullet)
 	else:
+		var a := 0.5 * PI * spread
+		var r := 2.0 / (count - 1)
 		for i in range(count):
 			_spawn_bullet(
 				position + Vector3((2.0 * offset / (count - 1) * i - offset), 0, 0),
 				velocity.rotated(
 					Vector3.UP,
-					(2.0 * spread / (count - 1) * i - spread)
+					a * (r * i - 1.0)
 				),
 				is_enemy_bullet
 			)
