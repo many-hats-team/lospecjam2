@@ -5,7 +5,6 @@ Title TBD
 ## TODO
 
 Player
-- Add healthbar
 - sfx
 
 Mobs
@@ -15,7 +14,6 @@ Mobs
 
 Boss
 - behaviors
-- healthbar
 - sfx
 
 Environment

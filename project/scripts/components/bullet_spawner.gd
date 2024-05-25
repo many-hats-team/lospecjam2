@@ -60,4 +60,9 @@ func _spawn_bullet(position: Vector3, velocity: Vector3, is_enemy_bullet: bool) 
 		var bullet := BulletScene.instantiate()
 		world.add_child(bullet)
 		velocity.y = 0
-		bullet.setup(position, velocity, is_enemy_bullet)
+		bullet.setup(
+			position,
+			velocity,
+			is_enemy_bullet,
+			mgmt.get_gen_mesh(MeshGen.Kind.POINTY)
+		)

@@ -22,6 +22,15 @@ func get_player() -> Player:
 	return _player_ref.get_ref()
 
 
+@onready var _gen_meshes := MeshGen.new().get_meshes()
+
+
+func get_gen_mesh(kind: MeshGen.Kind) -> Mesh:
+	var m := _gen_meshes[kind] as Mesh
+	assert(m)
+	return m
+
+
 func wait_phys_frames(n: int) -> void:
 	for _i in range(n):
 		await get_tree().physics_frame
