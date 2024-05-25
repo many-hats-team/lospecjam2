@@ -18,7 +18,9 @@ speed = 3.0
 spread = 0.3
 offset = 0.0
 count = 5
-reload_time = 0.5
+reload_time = 1.0
+burst_count = 3
+burst_time = 0.1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rr2qj"]
 resource_local_to_scene = true

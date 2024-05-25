@@ -13,3 +13,10 @@ enum Aiming {
 @export var offset := 0.0
 @export var count := 1
 @export var reload_time := 0.5
+@export var burst_count := 1
+@export var burst_time := 0.1
+
+
+func validate() -> void:
+	if burst_count > 1:
+		assert(reload_time > burst_time)

@@ -3,34 +3,24 @@ extends Node3D
 const BulletScene := preload("res://scenes/bullet.tscn")
 
 
-@export var weapon: WeaponRes:
-	set(res):
-		weapon = res
-		if res and timer:
-			timer.wait_time = res.reload_time
-
+@export var weapon: WeaponRes
 @export var is_enemy := false
+@export var auto_fire := false
 
-@export var auto_fire := false:
-	set(value):
-		auto_fire = value
-		if timer:
-			timer.one_shot = not value
-			if value:
-				start()
-			else:
-				stop()
-
-
-@onready var timer := %Timer as Timer
+@onready var reload_timer := %ReloadTimer as Timer
+@onready var burst_timer := %BurstTimer as Timer
 
 
 func _ready() -> void:
-	assert(timer)
-	weapon = weapon
-	auto_fire = auto_fire
-	if not weapon:
+	assert(reload_timer)
+	assert(burst_timer)
+	if weapon:
+		weapon.validate()
+	else:
 		push_error("No weapon resource assigned: %s" % [self])
+
+	if auto_fire:
+		start()
 
 
 func _on_timer_timeout() -> void:
@@ -38,14 +28,30 @@ func _on_timer_timeout() -> void:
 
 
 func start() -> void:
-	timer.start()
+	reload_timer.wait_time = weapon.reload_time
+	burst_timer.wait_time = weapon.burst_time
+	reload_timer.start()
 
 
 func stop() -> void:
-	timer.stop()
+	reload_timer.stop()
 
 
 func shoot() -> void:
+	if weapon.burst_count > 1:
+		burst_timer.start()
+		for i in range(weapon.burst_count):
+			_shoot_round()
+			await burst_timer.timeout
+		burst_timer.stop()
+	else:
+		_shoot_round()
+
+	if not auto_fire:
+		stop()
+
+
+func _shoot_round() -> void:
 	if not weapon:
 		assert(false)
 		return

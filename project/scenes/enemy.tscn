@@ -18,7 +18,9 @@ speed = 5.0
 spread = 0.0
 offset = 0.0
 count = 1
-reload_time = 1.0
+reload_time = 2.5
+burst_count = 3
+burst_time = 0.3
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q1rys"]
 resource_local_to_scene = true

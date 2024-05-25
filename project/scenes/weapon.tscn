@@ -4,11 +4,13 @@
 
 [node name="Weapon" type="Marker3D"]
 script = ExtResource("1_ak5k8")
-is_enemy = null
-auto_fire = null
 
-[node name="Timer" type="Timer" parent="."]
+[node name="ReloadTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 process_callback = 0
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="BurstTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+process_callback = 0
+
+[connection signal="timeout" from="ReloadTimer" to="." method="_on_timer_timeout"]

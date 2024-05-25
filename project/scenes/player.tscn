@@ -22,6 +22,8 @@ spread = 0.0
 offset = 0.1
 count = 2
 reload_time = 0.1
+burst_count = 1
+burst_time = 0.1
 
 [sub_resource type="Image" id="Image_bqd6a"]
 data = {
@@ -70,6 +72,7 @@ shape = SubResource("CapsuleShape3D_stm2o")
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.15)
 weapon = SubResource("Resource_s034d")
+is_enemy = false
 auto_fire = true
 
 [node name="Sprite" parent="." instance=ExtResource("3_oy13s")]
