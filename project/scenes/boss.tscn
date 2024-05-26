@@ -1,11 +1,83 @@
-[gd_scene load_steps=10 format=3 uid="uid://d1m14kpdnhtta"]
+[gd_scene load_steps=18 format=3 uid="uid://d1m14kpdnhtta"]
 
-[ext_resource type="Script" path="res://scripts/protoboss.gd" id="1_1sbx5"]
+[ext_resource type="Script" path="res://scripts/boss.gd" id="1_6h0se"]
 [ext_resource type="PackedScene" uid="uid://gcso6pn2lfot" path="res://scenes/sprite.tscn" id="3_c86hl"]
 [ext_resource type="PackedScene" uid="uid://cuef00urlja7j" path="res://scenes/weapon.tscn" id="3_dluwa"]
+[ext_resource type="Script" path="res://scripts/resources/boss_behavior_resource.gd" id="3_gmll3"]
 [ext_resource type="Script" path="res://scripts/resources/weapon_resource.gd" id="3_uiy0d"]
 [ext_resource type="Shader" path="res://shaders/sprite_shader.gdshader" id="4_v72ui"]
 [ext_resource type="Texture2D" uid="uid://cr8o8otby828f" path="res://assets/boss-Sheet.png" id="5_1f4wd"]
+
+[sub_resource type="Resource" id="Resource_gj02f"]
+script = ExtResource("3_gmll3")
+health = 200
+move_kind = 0
+move_center = Vector3(0, 0, 0)
+move_range = 1.0
+move_speed = 0.001
+
+[sub_resource type="Resource" id="Resource_m67q0"]
+script = ExtResource("3_uiy0d")
+mesh_kind = 1
+aim = 0
+speed = 5.0
+spread = 0.04
+offset = 0.4
+count = 2
+reload_time = 0.9
+burst_count = 5
+burst_time = 0.5
+
+[sub_resource type="Resource" id="Resource_e1a2s"]
+script = ExtResource("3_gmll3")
+weapon = SubResource("Resource_m67q0")
+health = 200
+move_kind = 1
+move_center = Vector3(0, 0, 0)
+move_range = 1.0
+move_speed = 0.001
+
+[sub_resource type="Resource" id="Resource_ln2ka"]
+script = ExtResource("3_uiy0d")
+mesh_kind = 1
+aim = 1
+speed = 3.0
+spread = 0.3
+offset = 0.5
+count = 5
+reload_time = 0.5
+burst_count = 1
+burst_time = 0.1
+
+[sub_resource type="Resource" id="Resource_2dxfr"]
+script = ExtResource("3_gmll3")
+weapon = SubResource("Resource_ln2ka")
+health = 200
+move_kind = 1
+move_center = Vector3(0, 0, 2)
+move_range = 1.0
+move_speed = 0.001
+
+[sub_resource type="Resource" id="Resource_6g7aw"]
+script = ExtResource("3_uiy0d")
+mesh_kind = 1
+aim = 1
+speed = 2.0
+spread = 2.0
+offset = 0.0
+count = 15
+reload_time = 1.0
+burst_count = 10
+burst_time = 0.5
+
+[sub_resource type="Resource" id="Resource_vjos0"]
+script = ExtResource("3_gmll3")
+weapon = SubResource("Resource_6g7aw")
+health = 200
+move_kind = 1
+move_center = Vector3(0, 0, 5)
+move_range = 1.0
+move_speed = 0.005
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_x364u"]
 size = Vector3(1.46484, 1, 0.351318)
@@ -41,15 +113,17 @@ shader_parameter/flash = false
 shader_parameter/flash_color = Vector3(1, 1, 1)
 shader_parameter/texture_albedo = ExtResource("5_1f4wd")
 
-[node name="ProtoBoss" type="CharacterBody3D"]
+[node name="Boss" type="CharacterBody3D"]
 collision_layer = 4
-script = ExtResource("1_1sbx5")
+script = ExtResource("1_6h0se")
+stages = Array[ExtResource("3_gmll3")]([SubResource("Resource_gj02f"), SubResource("Resource_e1a2s"), SubResource("Resource_2dxfr"), SubResource("Resource_vjos0")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.187716)
 shape = SubResource("BoxShape3D_x364u")
 
 [node name="Weapon" parent="." instance=ExtResource("3_dluwa")]
+unique_name_in_owner = true
 weapon = SubResource("Resource_toi5k")
 is_enemy = true
 auto_fire = true

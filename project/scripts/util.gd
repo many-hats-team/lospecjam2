@@ -12,5 +12,5 @@ static func multidup(sprite: Sprite2D, count: int, offset: float) -> Array[Sprit
 	out.append(sprite)
 	return out
 
-static func damp(source, target, base, time_scale):
-	return lerp(source, target, 1 - base * exp(-time_scale))
+static func damp(source, target, time: float, base: float = 1.0):
+	return lerp(source, target, 1 - base * exp(-time))

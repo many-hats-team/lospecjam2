@@ -17,8 +17,6 @@ func _ready() -> void:
 	mgmt.boss_health_changed.connect(_on_health_changed)
 
 
-func _on_health_changed(hp: int, maxhp: int) -> void:
-	var x := int(ceil(float(COUNT_PIPS) * float(hp) / float(maxhp)))
+func _on_health_changed(hp: int) -> void:
 	for i in range(COUNT_PIPS):
-		_pips[i].visible = i < x
-
+		_pips[i].visible = i < hp

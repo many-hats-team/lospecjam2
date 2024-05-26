@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c8at0t7xwevmr" path="res://scenes/player.tscn" id="2_15ibv"]
 [ext_resource type="Script" path="res://scripts/camera_follow.gd" id="2_eimwo"]
 [ext_resource type="Texture2D" uid="uid://bag5bmyhncjlr" path="res://assets/background-layer3.png" id="3_5y1xp"]
-[ext_resource type="PackedScene" uid="uid://d1m14kpdnhtta" path="res://scenes/protoboss.tscn" id="3_wdbhd"]
+[ext_resource type="PackedScene" uid="uid://d1m14kpdnhtta" path="res://scenes/boss.tscn" id="3_wdbhd"]
 [ext_resource type="Texture2D" uid="uid://cvowy0mjyyx7l" path="res://assets/background-layer4.png" id="4_l78ne"]
 [ext_resource type="Script" path="res://scripts/despawner.gd" id="6_jxhrw"]
 [ext_resource type="PackedScene" uid="uid://dpolfsh15rvao" path="res://scenes/components/enemy_spawner.tscn" id="6_shj7u"]

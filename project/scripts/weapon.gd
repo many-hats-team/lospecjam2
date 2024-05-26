@@ -3,7 +3,17 @@ extends Node3D
 const BulletScene := preload("res://scenes/bullet.tscn")
 
 
-@export var weapon: WeaponRes
+@export var weapon: WeaponRes:
+	set(w):
+		weapon = w
+		if w and reload_timer and burst_timer:
+			w.validate()
+			reload_timer.wait_time = weapon.reload_time
+			if weapon.burst_count > 1:
+				burst_timer.wait_time = weapon.burst_time / weapon.burst_count
+			if auto_fire:
+				start()
+
 @export var is_enemy := false
 @export var auto_fire := false
 
@@ -14,13 +24,8 @@ const BulletScene := preload("res://scenes/bullet.tscn")
 func _ready() -> void:
 	assert(reload_timer)
 	assert(burst_timer)
-	if weapon:
-		weapon.validate()
-	else:
-		push_error("No weapon resource assigned: %s" % [self])
+	weapon = weapon
 
-	if auto_fire:
-		start()
 
 
 func _on_timer_timeout() -> void:
@@ -28,8 +33,6 @@ func _on_timer_timeout() -> void:
 
 
 func start() -> void:
-	reload_timer.wait_time = weapon.reload_time
-	burst_timer.wait_time = weapon.burst_time
 	reload_timer.start()
 
 
@@ -38,6 +41,10 @@ func stop() -> void:
 
 
 func shoot() -> void:
+	if not weapon:
+		stop()
+		return
+
 	if weapon.burst_count > 1:
 		burst_timer.start()
 		for i in range(weapon.burst_count):
@@ -53,7 +60,6 @@ func shoot() -> void:
 
 func _shoot_round() -> void:
 	if not weapon:
-		assert(false)
 		return
 
 	var mesh := mgmt.get_gen_mesh(weapon.mesh_kind)

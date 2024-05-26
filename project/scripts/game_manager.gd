@@ -4,7 +4,7 @@ signal paused
 signal unpaused
 signal player_lives_changed(lives: int)
 signal score_changed(score: int)
-signal boss_health_changed(hp: int, maxhp: int)
+signal boss_health_changed(hp: int)
 
 var player_lives := 8
 var score := 0

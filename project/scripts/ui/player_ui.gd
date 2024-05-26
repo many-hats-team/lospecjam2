@@ -23,9 +23,8 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if display_score != target_score:
-		display_score = util.damp(display_score, target_score, 1.0, 10.0 * delta)
+		display_score = util.damp(display_score, target_score, 10.0 * delta)
 		_display(int(round(display_score)))
-
 
 
 func _on_lives_changed(lives: int) -> void:
