@@ -1,7 +1,6 @@
 [gd_scene load_steps=20 format=3 uid="uid://cahesrp5r3fya"]
 
 [ext_resource type="Texture2D" uid="uid://dp8bo4bps41x6" path="res://assets/background-layer1.png" id="1_c3i6r"]
-[ext_resource type="Script" path="res://scripts/game.gd" id="1_lrlg5"]
 [ext_resource type="Texture2D" uid="uid://b7piee4tst5c6" path="res://assets/background-layer2.png" id="2_sh3de"]
 [ext_resource type="Texture2D" uid="uid://bag5bmyhncjlr" path="res://assets/background-layer3.png" id="3_fman4"]
 [ext_resource type="Texture2D" uid="uid://cvowy0mjyyx7l" path="res://assets/background-layer4.png" id="4_c23a3"]
@@ -15,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://c0sxx3nwn2xey" path="res://scenes/ui/player_ui.tscn" id="12_6tpeq"]
 [ext_resource type="PackedScene" uid="uid://bklt26gd3x6dy" path="res://scenes/ui/boss_ui.tscn" id="13_45bgl"]
 [ext_resource type="Shader" path="res://shaders/post.gdshader" id="14_2vc5t"]
+[ext_resource type="PackedScene" uid="uid://c3607ky4oaybo" path="res://scenes/pause_menu.tscn" id="15_m44sc"]
 
 [sub_resource type="Environment" id="Environment_2xhke"]
 background_mode = 3
@@ -29,7 +29,6 @@ shader = ExtResource("14_2vc5t")
 size = Vector2(256, 224)
 
 [node name="Game" type="Node"]
-script = ExtResource("1_lrlg5")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -128,6 +127,11 @@ offset = 2.0
 position = Vector2(151, 0)
 
 [node name="BossUI" parent="UI" instance=ExtResource("13_45bgl")]
+
+[node name="Menu" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="Menu" instance=ExtResource("15_m44sc")]
+unique_name_in_owner = true
 
 [node name="Post" type="CanvasLayer" parent="."]
 

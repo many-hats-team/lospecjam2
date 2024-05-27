@@ -4,6 +4,7 @@ const MainMenuScene := preload("res://scenes/main_menu.tscn")
 const GameScene := preload("res://scenes/game.tscn")
 
 func _ready() -> void:
+	mgmt.quit_to_main_menu.connect(start_main_menu)
 	start_main_menu()
 
 
@@ -13,8 +14,7 @@ func start_main_menu() -> void:
 
 
 func start_game() -> void:
-	var game := change_scene(GameScene) as Game
-	game.game_quit.connect(start_main_menu)
+	change_scene(GameScene)
 
 
 func change_scene(scene: PackedScene) -> Node:

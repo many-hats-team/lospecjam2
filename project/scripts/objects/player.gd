@@ -70,7 +70,7 @@ func _on_hit() -> void:
 	# Short pause and flash
 	sprite.set_flash(true)
 	mgmt.pause()
-	await get_tree().create_timer(HIT_PAUSE_DURATION_S).timeout
+	await get_tree().create_timer(HIT_PAUSE_DURATION_S, false).timeout
 	mgmt.unpause()
 	sprite.set_flash(false)
 

@@ -1,10 +1,14 @@
 extends Node
 
+# Read/Write Signals: Below signals may be emitted by other scripts
+signal quit_to_main_menu
+signal boss_health_changed(hp: int)
+
+# Read-Only Signals: Below signals should only be emitted from this script
 signal paused
 signal unpaused
 signal player_lives_changed(lives: int)
 signal score_changed(score: int)
-signal boss_health_changed(hp: int)
 
 const BulletScene := preload("res://scenes/objects/bullet.tscn")
 
@@ -56,3 +60,7 @@ func add_score(x: int) -> void:
 func add_life(x: int) -> void:
 	player_lives += x
 	player_lives_changed.emit(player_lives)
+
+
+func quit() -> void:
+	get_tree().quit()

@@ -52,7 +52,7 @@ func _apply_texture():
 func blink(duration: float) -> void:
 	if not _is_blinking:
 		_is_blinking = true
-		var timer := get_tree().create_timer(duration)
+		var timer := get_tree().create_timer(duration, false)
 		while timer.time_left > 0.0:
 			visible = false
 			await mgmt.wait_phys_frames(FLASH_DURATION_FRAMES)

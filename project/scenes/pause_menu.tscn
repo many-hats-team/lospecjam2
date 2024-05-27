@@ -1,0 +1,95 @@
+[gd_scene load_steps=6 format=3 uid="uid://c3607ky4oaybo"]
+
+[ext_resource type="Script" path="res://scripts/pause_menu.gd" id="1_3lxv3"]
+[ext_resource type="FontFile" uid="uid://d0npbk5bb83mc" path="res://assets/fonts/04B_03__.TTF" id="7_86jry"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a7orr"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.490196, 0.490196, 0.639216, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a36vc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qymrq"]
+
+[node name="PauseMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_3lxv3")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(256, 224)
+offset_right = 256.0
+offset_bottom = 224.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_a7orr")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Buttons" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/Buttons"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("7_86jry")
+theme_override_font_sizes/font_size = 30
+text = "PAUSED"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ContinueButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/Buttons"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 5
+theme_override_fonts/font = ExtResource("7_86jry")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_a36vc")
+text = "Continue
+"
+
+[node name="MainMenuButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 5
+theme_override_fonts/font = ExtResource("7_86jry")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_qymrq")
+text = "Main Menu"
+
+[node name="QuitButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 5
+theme_override_fonts/font = ExtResource("7_86jry")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_qymrq")
+text = "Quit"
+
+[connection signal="pressed" from="MarginContainer/PanelContainer/MarginContainer/Buttons/ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="MarginContainer/PanelContainer/MarginContainer/Buttons/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="MarginContainer/PanelContainer/MarginContainer/Buttons/QuitButton" to="." method="_on_quit_button_pressed"]
