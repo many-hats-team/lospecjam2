@@ -1,7 +1,5 @@
 extends CharacterBody3D
 
-const Weapon := preload("res://scripts/weapon.gd")
-
 @export var stages: Array[BossBehaviorRes]
 
 

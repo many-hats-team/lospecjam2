@@ -13,7 +13,6 @@ Mobs
 - sfx
 
 Boss
-- behaviors
 - sfx
 
 Environment
@@ -32,3 +31,5 @@ Publish to itch.io
 ```
 ./publish.sh
 ```
+
+

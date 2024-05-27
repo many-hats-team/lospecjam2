@@ -1,6 +1,5 @@
+class_name Weapon
 extends Node3D
-
-const BulletScene := preload("res://scenes/bullet.tscn")
 
 
 @export var weapon: WeaponRes:
@@ -111,7 +110,7 @@ func _spawn_bullet(
 ) -> void:
 	var world := mgmt.get_world()
 	if world:
-		var bullet := BulletScene.instantiate()
+		var bullet := mgmt.BulletScene.instantiate()
 		world.add_child(bullet)
 		velocity.y = 0
 		bullet.setup(gpos, velocity, is_enemy_bullet, mesh)

@@ -1,7 +1,5 @@
 extends CharacterBody3D
 
-const BulletScene := preload("res://scenes/bullet.tscn")
-
 
 var health := 11
 

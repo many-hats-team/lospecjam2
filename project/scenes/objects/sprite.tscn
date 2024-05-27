@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cheieh1gokv2j" path="res://assets/enemy.png" id="1_3ybmj"]
 [ext_resource type="Shader" path="res://shaders/sprite_shader.gdshader" id="1_lwaed"]
-[ext_resource type="Script" path="res://scripts/sprite.gd" id="2_gc178"]
+[ext_resource type="Script" path="res://scripts/objects/sprite.gd" id="2_gc178"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cj5qo"]
 resource_local_to_scene = true

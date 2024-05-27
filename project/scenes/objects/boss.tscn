@@ -1,8 +1,8 @@
 [gd_scene load_steps=18 format=3 uid="uid://d1m14kpdnhtta"]
 
-[ext_resource type="Script" path="res://scripts/boss.gd" id="1_6h0se"]
-[ext_resource type="PackedScene" uid="uid://gcso6pn2lfot" path="res://scenes/sprite.tscn" id="3_c86hl"]
-[ext_resource type="PackedScene" uid="uid://cuef00urlja7j" path="res://scenes/weapon.tscn" id="3_dluwa"]
+[ext_resource type="Script" path="res://scripts/objects/boss.gd" id="1_6h0se"]
+[ext_resource type="PackedScene" uid="uid://gcso6pn2lfot" path="res://scenes/objects/sprite.tscn" id="3_c86hl"]
+[ext_resource type="PackedScene" uid="uid://cuef00urlja7j" path="res://scenes/objects/weapon.tscn" id="3_dluwa"]
 [ext_resource type="Script" path="res://scripts/resources/boss_behavior_resource.gd" id="3_gmll3"]
 [ext_resource type="Script" path="res://scripts/resources/weapon_resource.gd" id="3_uiy0d"]
 [ext_resource type="Shader" path="res://shaders/sprite_shader.gdshader" id="4_v72ui"]

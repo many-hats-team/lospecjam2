@@ -1,9 +1,6 @@
 class_name Player
 extends CharacterBody3D
 
-const BulletScene := preload("res://scenes/bullet.tscn")
-const Weapon := preload("res://scripts/weapon.gd")
-
 const MOVE_INPUT_SCALE := Vector2(3.0, 3.0)
 const MOVE_LERP_BASE := 0.3
 const MOVE_LERP_SCALE := 8.0

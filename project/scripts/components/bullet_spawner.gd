@@ -1,7 +1,5 @@
 extends Timer
 
-const BulletScene := preload("res://scenes/bullet.tscn")
-
 enum BulletType {
 	PLAYER_FORWARD,
 	ENEMY_TARGET_PLAYER,
@@ -65,7 +63,7 @@ func _shoot() -> void:
 func _spawn_bullet(position: Vector3, velocity: Vector3, is_enemy_bullet: bool) -> void:
 	var world := mgmt.get_world()
 	if world:
-		var bullet := BulletScene.instantiate()
+		var bullet := mgmt.BulletScene.instantiate()
 		world.add_child(bullet)
 		velocity.y = 0
 		bullet.setup(

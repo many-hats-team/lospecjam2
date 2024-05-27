@@ -1,19 +1,19 @@
 [gd_scene load_steps=19 format=3 uid="uid://cahesrp5r3fya"]
 
-[ext_resource type="Texture2D" uid="uid://dp8bo4bps41x6" path="res://assets/background-layer1.png" id="1_aous5"]
-[ext_resource type="Texture2D" uid="uid://b7piee4tst5c6" path="res://assets/background-layer2.png" id="1_f8hqw"]
-[ext_resource type="Script" path="res://scripts/world.gd" id="1_mh1ta"]
-[ext_resource type="PackedScene" uid="uid://c8at0t7xwevmr" path="res://scenes/player.tscn" id="2_15ibv"]
-[ext_resource type="Script" path="res://scripts/camera_follow.gd" id="2_eimwo"]
-[ext_resource type="Texture2D" uid="uid://bag5bmyhncjlr" path="res://assets/background-layer3.png" id="3_5y1xp"]
-[ext_resource type="PackedScene" uid="uid://d1m14kpdnhtta" path="res://scenes/boss.tscn" id="3_wdbhd"]
-[ext_resource type="Texture2D" uid="uid://cvowy0mjyyx7l" path="res://assets/background-layer4.png" id="4_l78ne"]
-[ext_resource type="Script" path="res://scripts/despawner.gd" id="6_jxhrw"]
-[ext_resource type="PackedScene" uid="uid://dpolfsh15rvao" path="res://scenes/components/enemy_spawner.tscn" id="6_shj7u"]
-[ext_resource type="PackedScene" uid="uid://008g4gtbtf0n" path="res://scenes/road.tscn" id="8_sxc8i"]
-[ext_resource type="PackedScene" uid="uid://c0sxx3nwn2xey" path="res://scenes/ui/player_ui.tscn" id="12_2x702"]
-[ext_resource type="Shader" path="res://shaders/post.gdshader" id="13_71tef"]
-[ext_resource type="PackedScene" uid="uid://bklt26gd3x6dy" path="res://scenes/ui/boss_ui.tscn" id="13_vxcr8"]
+[ext_resource type="Texture2D" uid="uid://dp8bo4bps41x6" path="res://assets/background-layer1.png" id="1_c3i6r"]
+[ext_resource type="Texture2D" uid="uid://b7piee4tst5c6" path="res://assets/background-layer2.png" id="2_sh3de"]
+[ext_resource type="Texture2D" uid="uid://bag5bmyhncjlr" path="res://assets/background-layer3.png" id="3_fman4"]
+[ext_resource type="Texture2D" uid="uid://cvowy0mjyyx7l" path="res://assets/background-layer4.png" id="4_c23a3"]
+[ext_resource type="Script" path="res://scripts/world.gd" id="5_32ryi"]
+[ext_resource type="PackedScene" uid="uid://008g4gtbtf0n" path="res://scenes/objects/road.tscn" id="6_s0c51"]
+[ext_resource type="Script" path="res://scripts/objects/camera_follow.gd" id="7_hli4n"]
+[ext_resource type="PackedScene" uid="uid://c8at0t7xwevmr" path="res://scenes/objects/player.tscn" id="8_j03ps"]
+[ext_resource type="PackedScene" uid="uid://d1m14kpdnhtta" path="res://scenes/objects/boss.tscn" id="9_mxjqf"]
+[ext_resource type="Script" path="res://scripts/objects/despawner.gd" id="10_wiqj0"]
+[ext_resource type="PackedScene" uid="uid://dpolfsh15rvao" path="res://scenes/components/enemy_spawner.tscn" id="11_tt8b7"]
+[ext_resource type="PackedScene" uid="uid://c0sxx3nwn2xey" path="res://scenes/ui/player_ui.tscn" id="12_6tpeq"]
+[ext_resource type="PackedScene" uid="uid://bklt26gd3x6dy" path="res://scenes/ui/boss_ui.tscn" id="13_45bgl"]
+[ext_resource type="Shader" path="res://shaders/post.gdshader" id="14_2vc5t"]
 
 [sub_resource type="Environment" id="Environment_2xhke"]
 background_mode = 3
@@ -22,12 +22,12 @@ background_mode = 3
 size = Vector3(13.0049, 2.03235, 1.17163)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xytw3"]
-shader = ExtResource("13_71tef")
+shader = ExtResource("14_2vc5t")
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_2rwes"]
 size = Vector2(256, 224)
 
-[node name="Node" type="Node"]
+[node name="Game" type="Node"]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -37,13 +37,13 @@ motion_scale = Vector2(0, 0)
 [node name="Background-layer1" type="Sprite2D" parent="ParallaxBackground/Sky"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_aous5")
+texture = ExtResource("1_c3i6r")
 centered = false
 
 [node name="Background-layer2" type="Sprite2D" parent="ParallaxBackground/Sky"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_f8hqw")
+texture = ExtResource("2_sh3de")
 centered = false
 
 [node name="Clouds" type="ParallaxLayer" parent="ParallaxBackground"]
@@ -54,7 +54,7 @@ motion_mirroring = Vector2(256, 0)
 texture_filter = 1
 texture_repeat = 2
 position = Vector2(0, -25)
-texture = ExtResource("3_5y1xp")
+texture = ExtResource("3_fman4")
 centered = false
 
 [node name="Buildings" type="ParallaxLayer" parent="ParallaxBackground"]
@@ -65,32 +65,32 @@ motion_mirroring = Vector2(256, 0)
 texture_filter = 1
 texture_repeat = 2
 position = Vector2(0, -21)
-texture = ExtResource("4_l78ne")
+texture = ExtResource("4_c23a3")
 centered = false
 
 [node name="World" type="Node3D" parent="."]
-script = ExtResource("1_mh1ta")
+script = ExtResource("5_32ryi")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
 environment = SubResource("Environment_2xhke")
 
-[node name="Road" parent="World" instance=ExtResource("8_sxc8i")]
+[node name="Road" parent="World" instance=ExtResource("6_s0c51")]
 
 [node name="Camera3D" type="Camera3D" parent="World"]
 transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 2.5, 6)
 fov = 50.0
-script = ExtResource("2_eimwo")
+script = ExtResource("7_hli4n")
 target_path = NodePath("../Player")
 parallax_path = NodePath("../../ParallaxBackground")
 
-[node name="Player" parent="World" instance=ExtResource("2_15ibv")]
+[node name="Player" parent="World" instance=ExtResource("8_j03ps")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.237524, 0)
 collision_mask = 37
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="World"]
 transform = Transform3D(0.965926, -1.13133e-08, 0.258819, -0.25, 0.258819, 0.933013, -0.0669873, -0.965926, 0.25, 0, 4, 0)
 
-[node name="Boss" parent="World" instance=ExtResource("3_wdbhd")]
+[node name="Boss" parent="World" instance=ExtResource("9_mxjqf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.270555, -6.09399)
 
 [node name="Barrier" type="StaticBody3D" parent="World"]
@@ -106,7 +106,7 @@ shape = SubResource("BoxShape3D_cdsm1")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.63541)
 collision_layer = 0
 collision_mask = 20
-script = ExtResource("6_jxhrw")
+script = ExtResource("10_wiqj0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="World/Despawner"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0161133, 0.516174, -1.70575)
@@ -115,17 +115,17 @@ shape = SubResource("BoxShape3D_cdsm1")
 [node name="EnemySpawnPoint" type="Marker3D" parent="World"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, -20)
 
-[node name="EnemySpawner" parent="World/EnemySpawnPoint" instance=ExtResource("6_shj7u")]
+[node name="EnemySpawner" parent="World/EnemySpawnPoint" instance=ExtResource("11_tt8b7")]
 wait_time = 2.0
 speed = 4.0
 offset = 2.0
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="PlayerUI" parent="UI" instance=ExtResource("12_2x702")]
+[node name="PlayerUI" parent="UI" instance=ExtResource("12_6tpeq")]
 position = Vector2(151, 0)
 
-[node name="BossUI" parent="UI" instance=ExtResource("13_vxcr8")]
+[node name="BossUI" parent="UI" instance=ExtResource("13_45bgl")]
 
 [node name="Post" type="CanvasLayer" parent="."]
 

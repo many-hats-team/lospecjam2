@@ -1,6 +1,6 @@
 extends Timer
 
-const EnemyScene := preload("res://scenes/enemy.tscn")
+const EnemyScene := preload("res://scenes/objects/enemy.tscn")
 
 
 @export var speed: float

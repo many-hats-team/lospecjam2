@@ -6,6 +6,8 @@ signal player_lives_changed(lives: int)
 signal score_changed(score: int)
 signal boss_health_changed(hp: int)
 
+const BulletScene := preload("res://scenes/objects/bullet.tscn")
+
 var player_lives := 8
 var score := 0
 
