@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://c3607ky4oaybo"]
+[gd_scene load_steps=7 format=3 uid="uid://c3607ky4oaybo"]
 
 [ext_resource type="Script" path="res://scripts/pause_menu.gd" id="1_3lxv3"]
+[ext_resource type="Script" path="res://scripts/components/hide_on_web_build.gd" id="3_8ct16"]
 [ext_resource type="FontFile" uid="uid://d0npbk5bb83mc" path="res://assets/fonts/04B_03__.TTF" id="7_86jry"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a7orr"]
@@ -89,6 +90,9 @@ theme_override_fonts/font = ExtResource("7_86jry")
 theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxEmpty_qymrq")
 text = "Quit"
+
+[node name="HideOnWebBuild" type="Node" parent="MarginContainer/PanelContainer/MarginContainer/Buttons/QuitButton"]
+script = ExtResource("3_8ct16")
 
 [connection signal="pressed" from="MarginContainer/PanelContainer/MarginContainer/Buttons/ContinueButton" to="." method="_on_continue_button_pressed"]
 [connection signal="pressed" from="MarginContainer/PanelContainer/MarginContainer/Buttons/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
