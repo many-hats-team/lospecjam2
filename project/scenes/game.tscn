@@ -1,6 +1,7 @@
-[gd_scene load_steps=19 format=3 uid="uid://cahesrp5r3fya"]
+[gd_scene load_steps=20 format=3 uid="uid://cahesrp5r3fya"]
 
 [ext_resource type="Texture2D" uid="uid://dp8bo4bps41x6" path="res://assets/background-layer1.png" id="1_c3i6r"]
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_lrlg5"]
 [ext_resource type="Texture2D" uid="uid://b7piee4tst5c6" path="res://assets/background-layer2.png" id="2_sh3de"]
 [ext_resource type="Texture2D" uid="uid://bag5bmyhncjlr" path="res://assets/background-layer3.png" id="3_fman4"]
 [ext_resource type="Texture2D" uid="uid://cvowy0mjyyx7l" path="res://assets/background-layer4.png" id="4_c23a3"]
@@ -28,6 +29,7 @@ shader = ExtResource("14_2vc5t")
 size = Vector2(256, 224)
 
 [node name="Game" type="Node"]
+script = ExtResource("1_lrlg5")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
