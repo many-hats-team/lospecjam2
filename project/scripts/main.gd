@@ -18,8 +18,7 @@ func start_game() -> void:
 
 
 func change_scene(scene: PackedScene) -> Node:
-	var node := get_child(0)
-
+	var node := util.try_get_child(self, 0)
 	if node:
 		remove_child(node)
 		node.queue_free()

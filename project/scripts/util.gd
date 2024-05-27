@@ -14,3 +14,12 @@ static func multidup(sprite: Sprite2D, count: int, offset: float) -> Array[Sprit
 
 static func damp(source, target, time: float, base: float = 1.0):
 	return lerp(source, target, 1 - base * exp(-time))
+
+
+static func try_get_child(node: Node, index: int) -> Node:
+	# Same as get_child(index), but doesn't log an error on failure
+	var children := node.get_children()
+	if children.size() > index:
+		return children[index]
+	else:
+		return null
