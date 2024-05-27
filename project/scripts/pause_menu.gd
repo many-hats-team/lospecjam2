@@ -23,6 +23,9 @@ func toggle() -> void:
 
 
 func open() -> void:
+	# Let animation-pauses complete
+	await mgmt.wait_until_unpause()
+
 	visible = true
 	continue_button.grab_focus()
 	mgmt.pause()

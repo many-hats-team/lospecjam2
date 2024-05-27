@@ -52,6 +52,11 @@ func unpause() -> void:
 	unpaused.emit()
 
 
+func wait_until_unpause() -> void:
+	while get_tree().paused:
+		await get_tree().process_frame
+
+
 func add_score(x: int) -> void:
 	score += x
 	score_changed.emit(score)
