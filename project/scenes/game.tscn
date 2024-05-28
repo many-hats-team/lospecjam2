@@ -8,10 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://008g4gtbtf0n" path="res://scenes/objects/road.tscn" id="6_s0c51"]
 [ext_resource type="Script" path="res://scripts/objects/camera_follow.gd" id="7_hli4n"]
 [ext_resource type="PackedScene" uid="uid://c8at0t7xwevmr" path="res://scenes/objects/player.tscn" id="8_j03ps"]
-[ext_resource type="PackedScene" uid="uid://d1m14kpdnhtta" path="res://scenes/objects/boss.tscn" id="9_mxjqf"]
 [ext_resource type="Script" path="res://scripts/objects/despawner.gd" id="10_wiqj0"]
 [ext_resource type="PackedScene" uid="uid://dpolfsh15rvao" path="res://scenes/components/enemy_spawner.tscn" id="11_tt8b7"]
 [ext_resource type="PackedScene" uid="uid://c0sxx3nwn2xey" path="res://scenes/ui/player_ui.tscn" id="12_6tpeq"]
+[ext_resource type="Script" path="res://scripts/spawn_boss.gd" id="12_um6i2"]
 [ext_resource type="PackedScene" uid="uid://bklt26gd3x6dy" path="res://scenes/ui/boss_ui.tscn" id="13_45bgl"]
 [ext_resource type="PackedScene" uid="uid://c3607ky4oaybo" path="res://scenes/pause_menu.tscn" id="15_m44sc"]
 
@@ -96,9 +96,6 @@ collision_mask = 37
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="MainLayer/World"]
 transform = Transform3D(0.965926, -1.13133e-08, 0.258819, -0.25, 0.258819, 0.933013, -0.0669873, -0.965926, 0.25, 0, 4, 0)
 
-[node name="Boss" parent="MainLayer/World" instance=ExtResource("9_mxjqf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.270555, -6.09399)
-
 [node name="Barrier" type="StaticBody3D" parent="MainLayer/World"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
 collision_layer = 32
@@ -137,6 +134,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, -20)
 wait_time = 2.0
 speed = 4.0
 offset = 2.0
+
+[node name="BossSpawnPoint" type="Marker3D" parent="MainLayer/World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, -42.6063)
+
+[node name="Timer" type="Timer" parent="MainLayer/World/BossSpawnPoint"]
+process_callback = 0
+wait_time = 20.0
+one_shot = true
+autostart = true
+script = ExtResource("12_um6i2")
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 2

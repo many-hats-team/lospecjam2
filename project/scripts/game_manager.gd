@@ -3,6 +3,7 @@ extends Node
 # Read/Write Signals: Below signals may be emitted by other scripts
 signal quit_to_main_menu
 signal boss_health_changed(hp: int)
+signal boss_spawned
 
 # Read-Only Signals: Below signals should only be emitted from this script
 signal paused

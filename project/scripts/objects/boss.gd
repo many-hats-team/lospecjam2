@@ -1,4 +1,9 @@
+class_name Boss
 extends CharacterBody3D
+
+
+const origin := Vector3(0.0, 0.0, -6.0)
+
 
 @export var stages: Array[BossBehaviorRes]
 
@@ -10,7 +15,7 @@ var _t_ms := 0
 @onready var sprite: MySprite = %Sprite
 @onready var weapon: Weapon = %Weapon
 @onready var trait_mortal := Mortal.new(self, 0, sprite, _on_death)
-@onready var origin := position
+
 
 
 func _ready() -> void:
@@ -20,10 +25,14 @@ func _ready() -> void:
 	# Wait for other nodes to connect to signals
 	await get_tree().process_frame
 
+	mgmt.boss_spawned.emit()
 	next_stage()
 
 
 func _physics_process(delta: float) -> void:
+	# Lock Y coordinate
+	position.y = origin.y
+
 	if is_dead() or stage < 0:
 		return
 
@@ -43,7 +52,7 @@ func _physics_process(delta: float) -> void:
 	position = util.damp(
 		position,
 		origin + move_target,
-		1000.0 * res.move_speed * delta
+		1000.0 * min(res.move_speed, 0.001) * delta
 	)
 
 
