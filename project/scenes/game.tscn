@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cahesrp5r3fya"]
+[gd_scene load_steps=17 format=3 uid="uid://cahesrp5r3fya"]
 
 [ext_resource type="Texture2D" uid="uid://dp8bo4bps41x6" path="res://assets/background-layer1.png" id="1_c3i6r"]
 [ext_resource type="Texture2D" uid="uid://b7piee4tst5c6" path="res://assets/background-layer2.png" id="2_sh3de"]
@@ -13,7 +13,6 @@
 [ext_resource type="PackedScene" uid="uid://dpolfsh15rvao" path="res://scenes/components/enemy_spawner.tscn" id="11_tt8b7"]
 [ext_resource type="PackedScene" uid="uid://c0sxx3nwn2xey" path="res://scenes/ui/player_ui.tscn" id="12_6tpeq"]
 [ext_resource type="PackedScene" uid="uid://bklt26gd3x6dy" path="res://scenes/ui/boss_ui.tscn" id="13_45bgl"]
-[ext_resource type="Shader" path="res://shaders/post.gdshader" id="14_2vc5t"]
 [ext_resource type="PackedScene" uid="uid://c3607ky4oaybo" path="res://scenes/pause_menu.tscn" id="15_m44sc"]
 
 [sub_resource type="Environment" id="Environment_2xhke"]
@@ -22,106 +21,103 @@ background_mode = 3
 [sub_resource type="BoxShape3D" id="BoxShape3D_cdsm1"]
 size = Vector3(13.0049, 2.03235, 1.17163)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xytw3"]
-shader = ExtResource("14_2vc5t")
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_2rwes"]
-size = Vector2(256, 224)
-
 [node name="Game" type="Node"]
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+[node name="MainLayer" type="CanvasLayer" parent="."]
 
-[node name="Sky" type="ParallaxLayer" parent="ParallaxBackground"]
+[node name="ParallaxBackground" type="ParallaxBackground" parent="MainLayer"]
+
+[node name="Sky" type="ParallaxLayer" parent="MainLayer/ParallaxBackground"]
 motion_scale = Vector2(0, 0)
 
-[node name="Background-layer1" type="Sprite2D" parent="ParallaxBackground/Sky"]
+[node name="Background-layer1" type="Sprite2D" parent="MainLayer/ParallaxBackground/Sky"]
 texture_filter = 1
 texture_repeat = 2
 texture = ExtResource("1_c3i6r")
 centered = false
 
-[node name="Background-layer2" type="Sprite2D" parent="ParallaxBackground/Sky"]
+[node name="Background-layer2" type="Sprite2D" parent="MainLayer/ParallaxBackground/Sky"]
 texture_filter = 1
 texture_repeat = 2
 texture = ExtResource("2_sh3de")
 centered = false
 
-[node name="Clouds" type="ParallaxLayer" parent="ParallaxBackground"]
+[node name="Clouds" type="ParallaxLayer" parent="MainLayer/ParallaxBackground"]
 motion_scale = Vector2(0.5, 0)
 motion_mirroring = Vector2(256, 0)
 
-[node name="Background-layer3" type="Sprite2D" parent="ParallaxBackground/Clouds"]
+[node name="Background-layer3" type="Sprite2D" parent="MainLayer/ParallaxBackground/Clouds"]
 texture_filter = 1
 texture_repeat = 2
 position = Vector2(0, -25)
 texture = ExtResource("3_fman4")
 centered = false
 
-[node name="Buildings" type="ParallaxLayer" parent="ParallaxBackground"]
+[node name="Buildings" type="ParallaxLayer" parent="MainLayer/ParallaxBackground"]
 motion_scale = Vector2(2, 2)
 motion_mirroring = Vector2(256, 0)
 
-[node name="Background-layer4" type="Sprite2D" parent="ParallaxBackground/Buildings"]
+[node name="Background-layer4" type="Sprite2D" parent="MainLayer/ParallaxBackground/Buildings"]
 texture_filter = 1
 texture_repeat = 2
 position = Vector2(0, -21)
 texture = ExtResource("4_c23a3")
 centered = false
 
-[node name="World" type="Node3D" parent="."]
+[node name="World" type="Node3D" parent="MainLayer"]
 script = ExtResource("5_32ryi")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="MainLayer/World"]
 environment = SubResource("Environment_2xhke")
 
-[node name="Road" parent="World" instance=ExtResource("6_s0c51")]
+[node name="Road" parent="MainLayer/World" instance=ExtResource("6_s0c51")]
 
-[node name="Camera3D" type="Camera3D" parent="World"]
+[node name="Camera3D" type="Camera3D" parent="MainLayer/World"]
 transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 2.5, 6)
 fov = 50.0
 script = ExtResource("7_hli4n")
 target_path = NodePath("../Player")
 parallax_path = NodePath("../../ParallaxBackground")
 
-[node name="Player" parent="World" instance=ExtResource("8_j03ps")]
+[node name="Player" parent="MainLayer/World" instance=ExtResource("8_j03ps")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.237524, 0)
 collision_mask = 37
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World"]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="MainLayer/World"]
 transform = Transform3D(0.965926, -1.13133e-08, 0.258819, -0.25, 0.258819, 0.933013, -0.0669873, -0.965926, 0.25, 0, 4, 0)
 
-[node name="Boss" parent="World" instance=ExtResource("9_mxjqf")]
+[node name="Boss" parent="MainLayer/World" instance=ExtResource("9_mxjqf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.270555, -6.09399)
 
-[node name="Barrier" type="StaticBody3D" parent="World"]
+[node name="Barrier" type="StaticBody3D" parent="MainLayer/World"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
 collision_layer = 32
 collision_mask = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Barrier"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MainLayer/World/Barrier"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0161133, 0.516174, -0.768921)
 shape = SubResource("BoxShape3D_cdsm1")
 
-[node name="Despawner" type="Area3D" parent="World"]
+[node name="Despawner" type="Area3D" parent="MainLayer/World"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.63541)
 collision_layer = 0
 collision_mask = 20
 script = ExtResource("10_wiqj0")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Despawner"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MainLayer/World/Despawner"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0161133, 0.516174, -1.70575)
 shape = SubResource("BoxShape3D_cdsm1")
 
-[node name="EnemySpawnPoint" type="Marker3D" parent="World"]
+[node name="EnemySpawnPoint" type="Marker3D" parent="MainLayer/World"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, -20)
 
-[node name="EnemySpawner" parent="World/EnemySpawnPoint" instance=ExtResource("11_tt8b7")]
+[node name="EnemySpawner" parent="MainLayer/World/EnemySpawnPoint" instance=ExtResource("11_tt8b7")]
 wait_time = 2.0
 speed = 4.0
 offset = 2.0
 
 [node name="UI" type="CanvasLayer" parent="."]
+layer = 2
 
 [node name="PlayerUI" parent="UI" instance=ExtResource("12_6tpeq")]
 position = Vector2(151, 0)
@@ -129,13 +125,7 @@ position = Vector2(151, 0)
 [node name="BossUI" parent="UI" instance=ExtResource("13_45bgl")]
 
 [node name="Menu" type="CanvasLayer" parent="."]
+layer = 3
 
 [node name="PauseMenu" parent="Menu" instance=ExtResource("15_m44sc")]
 unique_name_in_owner = true
-
-[node name="Post" type="CanvasLayer" parent="."]
-
-[node name="PostShader" type="Sprite2D" parent="Post"]
-material = SubResource("ShaderMaterial_xytw3")
-texture = SubResource("PlaceholderTexture2D_2rwes")
-centered = false

@@ -1,6 +1,39 @@
-[gd_scene load_steps=2 format=3 uid="uid://wxhk122jwlam"]
+[gd_scene load_steps=9 format=3 uid="uid://wxhk122jwlam"]
 
-[ext_resource type="Script" path="res://scripts/main.gd" id="1_e65p8"]
+[ext_resource type="Script" path="res://scripts/scene_loader.gd" id="1_e65p8"]
+[ext_resource type="Shader" path="res://shaders/debug_color_space.gdshader" id="2_7os8v"]
+[ext_resource type="Shader" path="res://shaders/post.gdshader" id="2_crojn"]
+[ext_resource type="Script" path="res://scripts/components/delete_on_release.gd" id="3_mlpxw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oprex"]
+shader = ExtResource("2_7os8v")
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_6tcyx"]
+size = Vector2(100, 100)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a2dwk"]
+shader = ExtResource("2_crojn")
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_5xrc6"]
+size = Vector2(256, 224)
 
 [node name="Main" type="Node"]
+
+[node name="SceneLoader" type="Node" parent="."]
 script = ExtResource("1_e65p8")
+
+[node name="Post" type="CanvasLayer" parent="."]
+layer = 128
+
+[node name="DebugColorSpace" type="TextureRect" parent="Post"]
+visible = false
+material = SubResource("ShaderMaterial_oprex")
+texture = SubResource("PlaceholderTexture2D_6tcyx")
+
+[node name="DeleteOnRelease" type="Node" parent="Post/DebugColorSpace"]
+script = ExtResource("3_mlpxw")
+
+[node name="PostShader" type="Sprite2D" parent="Post"]
+material = SubResource("ShaderMaterial_a2dwk")
+texture = SubResource("PlaceholderTexture2D_5xrc6")
+centered = false

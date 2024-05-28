@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://gcrnfsjpbs3f"]
+[gd_scene load_steps=9 format=3 uid="uid://gcrnfsjpbs3f"]
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_kporo"]
 [ext_resource type="Script" path="res://scripts/objects/parallax_scroll.gd" id="2_n3c47"]
@@ -7,14 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bag5bmyhncjlr" path="res://assets/background-layer3.png" id="5_ffeij"]
 [ext_resource type="Texture2D" uid="uid://cvowy0mjyyx7l" path="res://assets/background-layer4.png" id="6_qqgrj"]
 [ext_resource type="FontFile" uid="uid://d0npbk5bb83mc" path="res://assets/fonts/04B_03__.TTF" id="7_3miw0"]
-[ext_resource type="Shader" path="res://shaders/post.gdshader" id="8_328w8"]
 [ext_resource type="Script" path="res://scripts/components/hide_on_web_build.gd" id="8_fgsio"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_bk8uw"]
-shader = ExtResource("8_328w8")
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_b0vrr"]
-size = Vector2(256, 224)
 
 [node name="MainMenu" type="Node"]
 script = ExtResource("1_kporo")
@@ -95,13 +88,6 @@ text = "Quit"
 
 [node name="HideOnWebBuild" type="Node" parent="MarginContainer/VBoxContainer/Buttons/QuitButton"]
 script = ExtResource("8_fgsio")
-
-[node name="Post" type="CanvasLayer" parent="."]
-
-[node name="PostShader" type="Sprite2D" parent="Post"]
-material = SubResource("ShaderMaterial_bk8uw")
-texture = SubResource("PlaceholderTexture2D_b0vrr")
-centered = false
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Buttons/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Buttons/QuitButton" to="." method="_on_quit_button_pressed"]
