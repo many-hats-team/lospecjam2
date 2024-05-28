@@ -74,15 +74,22 @@ func _on_hit() -> void:
 	mgmt.unpause()
 	sprite.set_flash(false)
 
-	# Fall off screen and recover
-	var tween := create_tween()
-	tween\
+	# Fall off screen
+	await create_tween()\
 		.tween_property(self, "position:z", CRASH_POSITION_Z, CRASH_DURATION_S)\
-		.set_trans(Tween.TRANS_SINE)
-	tween\
+		.set_trans(Tween.TRANS_SINE)\
+		.finished
+
+	# Reset position
+	velocity = Vector3.ZERO
+	position.x = 0.0
+	sprite.texture = texture_center
+
+	# Come back on screen
+	await create_tween()\
 		.tween_property(self, "position:z", RECOVER_POSITION_Z, RECOVER_DURATION_S)\
-		.set_trans(Tween.TRANS_SINE)
-	await tween.finished
+		.set_trans(Tween.TRANS_SINE)\
+		.finished
 
 	# Regain control
 	weapon.start()
