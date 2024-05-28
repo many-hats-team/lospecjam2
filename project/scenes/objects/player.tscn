@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c8at0t7xwevmr"]
+[gd_scene load_steps=15 format=3 uid="uid://c8at0t7xwevmr"]
 
 [ext_resource type="Script" path="res://scripts/objects/player.gd" id="1_wm7v8"]
 [ext_resource type="PackedScene" uid="uid://gcso6pn2lfot" path="res://scenes/objects/sprite.tscn" id="3_oy13s"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cuef00urlja7j" path="res://scenes/objects/weapon.tscn" id="5_2854q"]
 [ext_resource type="Script" path="res://scripts/resources/weapon_resource.gd" id="6_6skat"]
 [ext_resource type="Image" uid="uid://dqn6d43fbbih6" path="res://assets/player-center.png" id="6_6sp4o"]
+[ext_resource type="Script" path="res://scripts/components/lock_y.gd" id="9_bdkco"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_stm2o"]
 radius = 0.108389
@@ -80,3 +81,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.146343, 0)
 material_override = SubResource("ShaderMaterial_6vudb")
 texture = SubResource("ImageTexture_jmprh")
 hframes = 2
+
+[node name="LockY" type="Node" parent="."]
+script = ExtResource("9_bdkco")

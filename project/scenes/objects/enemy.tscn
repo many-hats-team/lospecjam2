@@ -1,17 +1,17 @@
 [gd_scene load_steps=10 format=3 uid="uid://bu3dgfpefsqbi"]
 
-[ext_resource type="Script" path="res://scripts/objects/enemy.gd" id="1_77ic1"]
-[ext_resource type="PackedScene" uid="uid://cuef00urlja7j" path="res://scenes/objects/weapon.tscn" id="2_fa5y7"]
-[ext_resource type="PackedScene" uid="uid://gcso6pn2lfot" path="res://scenes/objects/sprite.tscn" id="3_agvp1"]
-[ext_resource type="Script" path="res://scripts/resources/weapon_resource.gd" id="3_ivteq"]
-[ext_resource type="Shader" path="res://shaders/sprite_shader.gdshader" id="4_dc720"]
-[ext_resource type="Texture2D" uid="uid://efsv2sqdsmlm" path="res://assets/cars.png" id="5_memss"]
+[ext_resource type="Script" path="res://scripts/objects/enemy.gd" id="1_udp51"]
+[ext_resource type="PackedScene" uid="uid://cuef00urlja7j" path="res://scenes/objects/weapon.tscn" id="2_ejq2r"]
+[ext_resource type="Script" path="res://scripts/resources/weapon_resource.gd" id="3_5uet7"]
+[ext_resource type="PackedScene" uid="uid://gcso6pn2lfot" path="res://scenes/objects/sprite.tscn" id="4_0wud0"]
+[ext_resource type="Shader" path="res://shaders/sprite_shader.gdshader" id="5_p7oux"]
+[ext_resource type="Texture2D" uid="uid://efsv2sqdsmlm" path="res://assets/cars.png" id="6_5q6cq"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6jsf0"]
 size = Vector3(1, 0.5, 0.5)
 
 [sub_resource type="Resource" id="Resource_2sepf"]
-script = ExtResource("3_ivteq")
+script = ExtResource("3_5uet7")
 mesh_kind = 0
 aim = 1
 speed = 5.0
@@ -25,7 +25,7 @@ burst_time = 0.3
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q1rys"]
 resource_local_to_scene = true
 render_priority = 0
-shader = ExtResource("4_dc720")
+shader = ExtResource("5_p7oux")
 shader_parameter/albedo = Color(1, 1, 1, 1)
 shader_parameter/alpha_scissor_threshold = 0.5
 shader_parameter/point_size = 1.0
@@ -39,25 +39,25 @@ shader_parameter/uv2_scale = Vector3(1, 1, 1)
 shader_parameter/uv2_offset = Vector3(0, 0, 0)
 shader_parameter/flash = false
 shader_parameter/flash_color = Vector3(1, 1, 1)
-shader_parameter/texture_albedo = ExtResource("5_memss")
+shader_parameter/texture_albedo = ExtResource("6_5q6cq")
 
 [node name="Enemy" type="CharacterBody3D"]
 collision_layer = 4
 collision_mask = 0
-script = ExtResource("1_77ic1")
+script = ExtResource("1_udp51")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_6jsf0")
 
-[node name="Weapon" parent="." instance=ExtResource("2_fa5y7")]
+[node name="Weapon" parent="." instance=ExtResource("2_ejq2r")]
 weapon = SubResource("Resource_2sepf")
 is_enemy = true
 auto_fire = true
 
-[node name="Sprite" parent="." instance=ExtResource("3_agvp1")]
+[node name="Sprite" parent="." instance=ExtResource("4_0wud0")]
 unique_name_in_owner = true
 material_override = SubResource("ShaderMaterial_q1rys")
-texture = ExtResource("5_memss")
+texture = ExtResource("6_5q6cq")
 hframes = 2
 vframes = 10
 frame = 4
