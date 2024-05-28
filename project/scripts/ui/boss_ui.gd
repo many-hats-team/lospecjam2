@@ -15,12 +15,9 @@ var lives := COUNT_PIPS:
 
 func _ready() -> void:
 	visible = false
-	mgmt.boss_spawned.connect(_on_spawned)
+	mgmt.boss_spawned.connect(show)
+	mgmt.boss_died.connect(hide)
 	mgmt.boss_health_changed.connect(_on_health_changed)
-
-
-func _on_spawned() -> void:
-	visible = true
 
 
 func _on_health_changed(hp: int) -> void:

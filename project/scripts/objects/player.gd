@@ -14,6 +14,10 @@ const RECOVER_POSITION_Z := 3.0
 const RECOVER_DURATION_S := 1.0
 const IFRAME_DURATION_S := 2.0
 
+const WIN_DELAY_S := 1.0
+const WIN_POSITION_Z := -50.0
+const WIN_DURATION_S := 5.0
+
 @export var image_center: Image
 @export var image_left: Image
 @export var image_right: Image
@@ -27,6 +31,7 @@ const IFRAME_DURATION_S := 2.0
 
 var is_input_enabled := true
 var is_in_hit_animation := false
+var is_game_over := false
 
 func _ready() -> void:
 	assert(sprite)
@@ -35,13 +40,15 @@ func _ready() -> void:
 	mgmt.set_player(self)
 	sprite.texture = texture_center
 
+	mgmt.boss_died.connect(_on_boss_died)
+
 
 func get_input_vector() -> Vector2:
 	return Input.get_vector("player_left", "player_right", "player_up", "player_down")
 
 
 func _physics_process(delta: float) -> void:
-	if is_input_enabled:
+	if is_input_enabled and not is_game_over:
 		var target_velocity := get_input_vector() * MOVE_INPUT_SCALE
 		var weight = pow(MOVE_LERP_BASE, delta * MOVE_LERP_SCALE)
 		velocity.x = lerpf(target_velocity.x, velocity.x, weight)
@@ -58,7 +65,7 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_hit() -> void:
-	if is_in_hit_animation:
+	if is_in_hit_animation or is_game_over:
 		return
 
 	mgmt.add_life(-1)
@@ -99,3 +106,29 @@ func _on_hit() -> void:
 	await sprite.blink(IFRAME_DURATION_S)
 
 	is_in_hit_animation = false
+
+
+func _on_boss_died() -> void:
+	is_game_over = true
+
+	sprite.texture = texture_center
+
+	# disable collision
+	collision_mask = 0
+	collision_layer = 0
+
+	# wait until any hit animation is done
+	while is_in_hit_animation:
+		await get_tree().process_frame
+
+	await get_tree().create_timer(WIN_DELAY_S).timeout
+
+	await create_tween()\
+		.tween_property(self, "position:z", WIN_POSITION_Z, WIN_DURATION_S)\
+		.set_ease(Tween.EASE_IN)\
+		.set_trans(Tween.TRANS_LINEAR)\
+		.finished
+
+	mgmt.game_over_win.emit()
+
+	print("You win")

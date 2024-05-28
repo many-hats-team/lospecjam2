@@ -66,6 +66,7 @@ func next_stage() -> void:
 	mgmt.boss_health_changed.emit(stages.size() - stage)
 
 	if is_dead():
+		mgmt.boss_died.emit()
 		queue_free()
 	else:
 		var res := stages[stage]

@@ -12,6 +12,7 @@ const EnemyScene := preload("res://scenes/objects/enemy.tscn")
 func _ready() -> void:
 	assert(source_node)
 	timeout.connect(_on_timeout)
+	mgmt.boss_died.connect(stop)
 
 
 func _on_timeout() -> void:

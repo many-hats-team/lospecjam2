@@ -25,6 +25,12 @@ func _ready() -> void:
 	assert(burst_timer)
 	weapon = weapon
 
+	mgmt.boss_died.connect(_disable_weapons)
+
+
+func _disable_weapons() -> void:
+	reload_timer.stop()
+	burst_timer.stop()
 
 
 func _on_timer_timeout() -> void:

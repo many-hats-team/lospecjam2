@@ -4,6 +4,9 @@ extends Node
 signal quit_to_main_menu
 signal boss_health_changed(hp: int)
 signal boss_spawned
+signal boss_died
+signal game_over_win
+signal game_over_lose
 
 # Read-Only Signals: Below signals should only be emitted from this script
 signal paused
