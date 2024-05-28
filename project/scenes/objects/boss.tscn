@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://d1m14kpdnhtta"]
+[gd_scene load_steps=19 format=3 uid="uid://d1m14kpdnhtta"]
 
 [ext_resource type="Script" path="res://scripts/objects/boss.gd" id="1_6h0se"]
 [ext_resource type="PackedScene" uid="uid://gcso6pn2lfot" path="res://scenes/objects/sprite.tscn" id="3_c86hl"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://scripts/resources/weapon_resource.gd" id="3_uiy0d"]
 [ext_resource type="Shader" path="res://shaders/sprite_shader.gdshader" id="4_v72ui"]
 [ext_resource type="Texture2D" uid="uid://cr8o8otby828f" path="res://assets/boss-Sheet.png" id="5_1f4wd"]
+[ext_resource type="Script" path="res://scripts/components/lock_y.gd" id="8_8ydsr"]
 
 [sub_resource type="Resource" id="Resource_gj02f"]
 script = ExtResource("3_gmll3")
@@ -135,3 +136,6 @@ offset = Vector2(0, 64)
 texture = ExtResource("5_1f4wd")
 hframes = 4
 frame_end = 3
+
+[node name="LockY" type="Node" parent="."]
+script = ExtResource("8_8ydsr")

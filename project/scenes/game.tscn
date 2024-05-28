@@ -47,12 +47,19 @@ centered = false
 
 [node name="Clouds" type="ParallaxLayer" parent="MainLayer/ParallaxBackground"]
 motion_scale = Vector2(0.5, 0)
-motion_mirroring = Vector2(256, 0)
+motion_mirroring = Vector2(256, 224)
 
-[node name="Background-layer3" type="Sprite2D" parent="MainLayer/ParallaxBackground/Clouds"]
+[node name="Clouds1" type="Sprite2D" parent="MainLayer/ParallaxBackground/Clouds"]
 texture_filter = 1
 texture_repeat = 2
 position = Vector2(0, -25)
+texture = ExtResource("3_fman4")
+centered = false
+
+[node name="Clouds2" type="Sprite2D" parent="MainLayer/ParallaxBackground/Clouds"]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(0, 90)
 texture = ExtResource("3_fman4")
 centered = false
 
@@ -144,3 +151,4 @@ layer = 3
 
 [node name="PauseMenu" parent="Menu" instance=ExtResource("15_m44sc")]
 unique_name_in_owner = true
+visible = false

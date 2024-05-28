@@ -7,6 +7,9 @@ extends Camera3D
 @onready var target := get_node(target_path) as Node3D
 @onready var bg := get_node(parallax_path) as ParallaxBackground
 
+const SCROLL_SPEED := 0.2
+const MAX_SCROLL := 40.0
+
 var level_scroll := 0.0
 
 func _ready() -> void:
@@ -15,7 +18,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	level_scroll += delta
+	level_scroll = min(MAX_SCROLL, level_scroll + SCROLL_SPEED * delta)
 
 	if enabled:
 		var weight := pow(0.3, delta * 10.0)
