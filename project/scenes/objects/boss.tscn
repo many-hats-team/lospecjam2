@@ -135,4 +135,5 @@ material_override = SubResource("ShaderMaterial_rr2qj")
 offset = Vector2(0, 64)
 texture = ExtResource("5_1f4wd")
 hframes = 4
+vframes = 5
 frame_end = 3
