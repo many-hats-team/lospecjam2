@@ -92,6 +92,10 @@ func _on_hit() -> void:
 	position.x = 0.0
 	sprite.texture = texture_center
 
+	if mgmt.state.player_lives <= 0:
+		mgmt.game_over_lose.emit()
+		return
+
 	# Come back on screen
 	await create_tween()\
 		.tween_property(self, "position:z", RECOVER_POSITION_Z, RECOVER_DURATION_S)\

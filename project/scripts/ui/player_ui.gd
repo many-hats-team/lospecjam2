@@ -14,10 +14,10 @@ var target_score := 0.0
 
 
 func _ready() -> void:
-	_on_lives_changed(mgmt.player_lives)
+	_on_lives_changed(mgmt.state.player_lives)
 	mgmt.player_lives_changed.connect(_on_lives_changed)
 
-	_on_score_changed(mgmt.score)
+	_on_score_changed(mgmt.state.score)
 	mgmt.score_changed.connect(_on_score_changed)
 
 

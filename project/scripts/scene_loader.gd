@@ -5,6 +5,7 @@ const GameScene := preload("res://scenes/game.tscn")
 
 func _ready() -> void:
 	mgmt.quit_to_main_menu.connect(start_main_menu)
+	mgmt.restart_requested.connect(start_game)
 	start_main_menu()
 
 
@@ -14,6 +15,7 @@ func start_main_menu() -> void:
 
 
 func start_game() -> void:
+	mgmt.reset_state()
 	change_scene(GameScene)
 
 

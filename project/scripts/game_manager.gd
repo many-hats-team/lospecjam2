@@ -7,6 +7,7 @@ signal boss_spawned
 signal boss_died
 signal game_over_win
 signal game_over_lose
+signal restart_requested
 
 # Read-Only Signals: Below signals should only be emitted from this script
 signal paused
@@ -16,23 +17,34 @@ signal score_changed(score: int)
 
 const BulletScene := preload("res://scenes/objects/bullet.tscn")
 
-var player_lives := 8
-var score := 0
+class GameState extends RefCounted:
+	var player_lives := 8
+	var score := 0
+	var world_ref: WeakRef
+	var player_ref: WeakRef
 
-var _world_ref: WeakRef
-func set_world(world: Node3D) -> void:
-	_world_ref = weakref(world)
-func get_world() -> Node3D:
-	return _world_ref.get_ref()
-
-var _player_ref: WeakRef
-func set_player(player: Player) -> void:
-	_player_ref = weakref(player)
-func get_player() -> Player:
-	return _player_ref.get_ref()
-
+var state: GameState
 
 @onready var _gen_meshes := MeshGen.new().get_meshes()
+
+
+func _ready() -> void:
+	reset_state()
+
+
+func reset_state() -> void:
+	state = GameState.new()
+
+
+func set_world(world: Node3D) -> void:
+	state.world_ref = weakref(world)
+func get_world() -> Node3D:
+	return state.world_ref.get_ref()
+
+func set_player(player: Player) -> void:
+	state.player_ref = weakref(player)
+func get_player() -> Player:
+	return state.player_ref.get_ref()
 
 
 func get_gen_mesh(kind: MeshGen.Kind) -> Mesh:
@@ -62,13 +74,13 @@ func wait_until_unpause() -> void:
 
 
 func add_score(x: int) -> void:
-	score += x
-	score_changed.emit(score)
+	state.score += x
+	score_changed.emit(state.score)
 
 
 func add_life(x: int) -> void:
-	player_lives += x
-	player_lives_changed.emit(player_lives)
+	state.player_lives += x
+	player_lives_changed.emit(state.player_lives)
 
 
 func quit() -> void:
