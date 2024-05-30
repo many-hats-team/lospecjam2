@@ -86,3 +86,11 @@ func add_life(x: int) -> void:
 
 func quit() -> void:
 	get_tree().quit()
+
+
+func pausable_timer(time_sec: float) -> SceneTreeTimer:
+	return get_tree().create_timer(time_sec, false)
+
+
+func unpausable_timer(time_sec: float) -> SceneTreeTimer:
+	return get_tree().create_timer(time_sec)

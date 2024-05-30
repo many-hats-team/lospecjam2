@@ -71,7 +71,7 @@ func next_stage() -> void:
 		set_sprite_anim(4)
 		mgmt.boss_died.emit()
 
-		await get_tree().create_timer(3.0).timeout
+		await mgmt.pausable_timer(3.0).timeout
 		mgmt.boss_removed.emit()
 
 		queue_free()

@@ -78,7 +78,7 @@ func _on_hit() -> void:
 	# Short pause and flash
 	sprite.set_flash(true)
 	mgmt.pause()
-	await get_tree().create_timer(HIT_PAUSE_DURATION_S).timeout
+	await mgmt.unpausable_timer(HIT_PAUSE_DURATION_S).timeout
 	mgmt.unpause()
 	sprite.set_flash(false)
 
@@ -126,7 +126,7 @@ func _on_boss_removed() -> void:
 	while is_in_hit_animation:
 		await get_tree().process_frame
 
-	await get_tree().create_timer(WIN_DELAY_S).timeout
+	await mgmt.pausable_timer(WIN_DELAY_S).timeout
 
 	await create_tween()\
 		.tween_property(self, "position:z", WIN_POSITION_Z, WIN_DURATION_S)\
