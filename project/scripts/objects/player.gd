@@ -41,6 +41,7 @@ func _ready() -> void:
 	sprite.texture = texture_center
 
 	mgmt.boss_died.connect(_on_boss_died)
+	mgmt.boss_removed.connect(_on_boss_removed)
 
 
 func get_input_vector() -> Vector2:
@@ -114,13 +115,13 @@ func _on_hit() -> void:
 
 func _on_boss_died() -> void:
 	is_game_over = true
-
 	sprite.texture = texture_center
-
 	# disable collision
 	collision_mask = 0
 	collision_layer = 0
 
+
+func _on_boss_removed() -> void:
 	# wait until any hit animation is done
 	while is_in_hit_animation:
 		await get_tree().process_frame
@@ -134,5 +135,3 @@ func _on_boss_died() -> void:
 		.finished
 
 	mgmt.game_over_win.emit()
-
-	print("You win")

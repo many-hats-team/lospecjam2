@@ -2,6 +2,8 @@
 class_name MySprite
 extends Sprite3D
 
+signal animation_cycle
+
 const FLASH_DURATION_FRAMES := 2
 
 @export var frame_duration_s := 0.1:
@@ -81,3 +83,5 @@ func next_frame() -> void:
 	if n > frame_end:
 		n = frame_start
 	frame = n
+	if frame == frame_end:
+		animation_cycle.emit()

@@ -5,6 +5,7 @@ signal quit_to_main_menu
 signal boss_health_changed(hp: int)
 signal boss_spawned
 signal boss_died
+signal boss_removed
 signal game_over_win
 signal game_over_lose
 signal restart_requested

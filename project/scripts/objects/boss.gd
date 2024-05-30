@@ -2,6 +2,8 @@ class_name Boss
 extends CharacterBody3D
 
 
+const STAGE_FRAMES = 4
+
 const origin := Vector3(0.0, 0.0, -6.0)
 
 
@@ -66,12 +68,36 @@ func next_stage() -> void:
 	mgmt.boss_health_changed.emit(stages.size() - stage)
 
 	if is_dead():
+		set_sprite_anim(4)
 		mgmt.boss_died.emit()
+
+		await get_tree().create_timer(3.0).timeout
+		mgmt.boss_removed.emit()
+
 		queue_free()
 	else:
 		var res := stages[stage]
 		weapon.weapon = res.weapon
 		trait_mortal.health = res.health
+
+		match stage:
+			0:
+				set_sprite_anim(0)
+			2:
+				set_sprite_anim(1)
+				await sprite.animation_cycle
+				set_sprite_anim(2)
+			3:
+				set_sprite_anim(3)
+
+
+func set_sprite_anim(row: int) -> void:
+	sprite.frame_start = STAGE_FRAMES * row
+	if row == 4:
+		sprite.frame_end = sprite.frame_start
+	else:
+		sprite.frame_end = STAGE_FRAMES * (row + 1) - 1
+
 
 
 func _on_death() -> void:
