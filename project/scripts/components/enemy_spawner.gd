@@ -39,14 +39,11 @@ func _on_timeout() -> void:
 
 	var world := mgmt.get_world()
 	if world:
-		var enemy: Enemy
+		var enemy: Node3D
 		match kind:
 			Kind.CAR:
-				enemy = CarScene.instantiate() as Enemy
+				enemy = CarScene.instantiate()
 			Kind.BIKER:
-				enemy = BikerScene.instantiate() as Enemy
+				enemy = BikerScene.instantiate()
+		enemy.position = global_position + Vector3(rng.randf_range(-offset, offset), 0, 0)
 		world.add_child(enemy)
-		enemy.setup(
-			global_position + Vector3(rng.randf_range(-offset, offset), 0, 0),
-			Vector3.BACK * speed
-		)

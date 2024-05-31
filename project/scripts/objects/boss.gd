@@ -16,6 +16,7 @@ var _t_ms := 0
 
 @onready var sprite: MySprite = %Sprite
 @onready var weapon: Weapon = %Weapon
+@onready var damage_effect = %DamageEffect as DamageEffect
 @onready var trait_mortal := Mortal.new(self, 0, sprite, _on_death)
 
 
@@ -23,6 +24,7 @@ var _t_ms := 0
 func _ready() -> void:
 	assert(sprite)
 	assert(weapon)
+	assert(damage_effect)
 
 	# Wait for other nodes to connect to signals
 	await get_tree().process_frame
@@ -90,6 +92,9 @@ func next_stage() -> void:
 			3:
 				set_sprite_anim(3)
 
+		await get_tree().create_timer(2.0).timeout
+		damage_effect.stop()
+
 
 func set_sprite_anim(row: int) -> void:
 	sprite.frame_start = STAGE_FRAMES * row
@@ -102,4 +107,5 @@ func set_sprite_anim(row: int) -> void:
 
 func _on_death() -> void:
 	mgmt.add_score(1000)
+	damage_effect.start()
 	next_stage()

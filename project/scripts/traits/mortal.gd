@@ -4,7 +4,7 @@ extends Trait
 signal health_changed(hp: int, maxhp: int)
 
 static func trait_name() -> StringName:
-	return "Mortal"
+	return &"Mortal"
 
 static func trait_get(obj: Object) -> Mortal:
 	return Trait._trait_get(obj, trait_name()) as Mortal
@@ -33,7 +33,7 @@ func _on_hit() -> void:
 	if health <= 0:
 		return
 
-	mgmt.add_score(1)
+	#mgmt.add_score(1)
 	sprite.hit_flash()
 
 	health -= 1

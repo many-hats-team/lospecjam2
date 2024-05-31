@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://b37dry5xl67cl"]
+[gd_scene load_steps=8 format=3 uid="uid://b37dry5xl67cl"]
 
-[ext_resource type="Script" path="res://scripts/objects/enemy.gd" id="1_sfgrt"]
 [ext_resource type="PackedScene" uid="uid://gcso6pn2lfot" path="res://scenes/objects/sprite.tscn" id="4_2vwqi"]
+[ext_resource type="PackedScene" uid="uid://csk4ulwdn6hd2" path="res://scenes/damage_effect.tscn" id="5_06wga"]
+[ext_resource type="Script" path="res://scripts/enemies/car.gd" id="5_drbvb"]
 [ext_resource type="Shader" path="res://shaders/sprite_shader.gdshader" id="5_x0x8j"]
 [ext_resource type="Texture2D" uid="uid://efsv2sqdsmlm" path="res://assets/cars.png" id="6_4r642"]
 
@@ -30,7 +31,7 @@ shader_parameter/texture_albedo = ExtResource("6_4r642")
 [node name="Car" type="CharacterBody3D"]
 collision_layer = 4
 collision_mask = 0
-script = ExtResource("1_sfgrt")
+script = ExtResource("5_drbvb")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_6jsf0")
@@ -40,7 +41,12 @@ unique_name_in_owner = true
 material_override = SubResource("ShaderMaterial_q1rys")
 texture = ExtResource("6_4r642")
 hframes = 2
-vframes = 10
+vframes = 12
 frame = 4
 frame_start = 4
 frame_end = 5
+
+[node name="DamageEffect" parent="." instance=ExtResource("5_06wga")]
+unique_name_in_owner = true
+kind = 1
+size = Vector2(0.7, 0.5)
