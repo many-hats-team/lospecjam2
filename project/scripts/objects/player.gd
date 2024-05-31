@@ -28,6 +28,7 @@ const WIN_DURATION_S := 5.0
 
 @onready var sprite := %Sprite as MySprite
 @onready var weapon := %Weapon as Weapon
+@onready var damage_effect := %DamageEffect as DamageEffect
 
 var is_input_enabled := true
 var is_in_hit_animation := false
@@ -36,6 +37,8 @@ var is_game_over := false
 func _ready() -> void:
 	assert(sprite)
 	assert(weapon)
+	assert(damage_effect)
+
 	HitBox.new(self, _on_hit)
 	mgmt.set_player(self)
 	sprite.texture = texture_center
@@ -74,6 +77,7 @@ func _on_hit() -> void:
 	is_in_hit_animation = true
 	is_input_enabled = false
 	weapon.stop()
+	damage_effect.start()
 
 	# Short pause and flash
 	sprite.set_flash(true)

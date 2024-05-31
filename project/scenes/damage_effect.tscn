@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://csk4ulwdn6hd2"]
+
+[ext_resource type="Script" path="res://scripts/damage_effect.gd" id="1_telbt"]
+[ext_resource type="PackedScene" uid="uid://gcso6pn2lfot" path="res://scenes/objects/sprite.tscn" id="2_n1bw7"]
+[ext_resource type="Shader" path="res://shaders/sprite_shader.gdshader" id="3_jq2sm"]
+[ext_resource type="Texture2D" uid="uid://bm8085ofiw848" path="res://assets/effects-Sheet.png" id="4_vk0o3"]
+[ext_resource type="AudioStream" uid="uid://dy5h6mi67jbkv" path="res://assets/vendor/damage-sfx.ogg" id="5_y2ujn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rh2bx"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_jq2sm")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/alpha_scissor_threshold = 0.5
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(32, 32, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/flash = false
+shader_parameter/flash_color = Vector3(1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("4_vk0o3")
+
+[node name="DamageEffect" type="Node3D"]
+script = ExtResource("1_telbt")
+
+[node name="Sprite" parent="." instance=ExtResource("2_n1bw7")]
+unique_name_in_owner = true
+material_override = SubResource("ShaderMaterial_rh2bx")
+texture = ExtResource("4_vk0o3")
+hframes = 4
+vframes = 3
+frame = 4
+frame_duration_s = 0.05
+frame_start = 4
+frame_end = 7
+
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+process_mode = 3
+stream = ExtResource("5_y2ujn")
+pitch_scale = 0.78
+bus = &"SFX"
+
+[connection signal="animation_cycle" from="Sprite" to="." method="_on_sprite_animation_cycle"]

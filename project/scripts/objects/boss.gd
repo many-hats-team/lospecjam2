@@ -26,6 +26,8 @@ func _ready() -> void:
 	assert(weapon)
 	assert(damage_effect)
 
+	trait_mortal.health_changed.connect(_on_hit)
+
 	# Wait for other nodes to connect to signals
 	await get_tree().process_frame
 
@@ -103,6 +105,9 @@ func set_sprite_anim(row: int) -> void:
 	else:
 		sprite.frame_end = STAGE_FRAMES * (row + 1) - 1
 
+
+func _on_hit(_hp: int, _maxhp: int) -> void:
+	mgmt.add_score(1)
 
 
 func _on_death() -> void:

@@ -22,12 +22,15 @@ const FLASH_DURATION_FRAMES := 2
 		frame = min(frame, value)
 
 @onready var timer := %Timer as Timer
+@onready var flash_sfx := %FlashSfx as AudioStreamPlayer
 
 var _is_flashing := false
 var _is_blinking := false
 
 func _ready() -> void:
 	assert(timer)
+	assert(flash_sfx)
+
 	frame_duration_s = frame_duration_s
 	timer.timeout.connect(next_frame)
 
@@ -71,6 +74,7 @@ func set_flash(enabled: bool) -> void:
 func hit_flash() -> void:
 	if not _is_flashing:
 		_is_flashing = true
+		flash_sfx.play()
 		set_flash(true)
 		await mgmt.wait_phys_frames(FLASH_DURATION_FRAMES)
 		set_flash(false)
@@ -83,5 +87,5 @@ func next_frame() -> void:
 	if n > frame_end:
 		n = frame_start
 	frame = n
-	if frame == frame_end:
+	if frame == frame_start:
 		animation_cycle.emit()

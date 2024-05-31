@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cuef00urlja7j"]
+[gd_scene load_steps=3 format=3 uid="uid://cuef00urlja7j"]
 
 [ext_resource type="Script" path="res://scripts/objects/weapon.gd" id="1_ak5k8"]
+[ext_resource type="AudioStream" uid="uid://g3m5rnqmyocw" path="res://assets/vendor/shot-sfx.ogg" id="2_8jkgl"]
 
 [node name="Weapon" type="Marker3D"]
 script = ExtResource("1_ak5k8")
@@ -12,5 +13,12 @@ process_callback = 0
 [node name="BurstTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 process_callback = 0
+
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+process_mode = 3
+stream = ExtResource("2_8jkgl")
+volume_db = -3.0
+bus = &"SFX"
 
 [connection signal="timeout" from="ReloadTimer" to="." method="_on_timer_timeout"]

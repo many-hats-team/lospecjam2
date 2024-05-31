@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c8at0t7xwevmr"]
+[gd_scene load_steps=16 format=3 uid="uid://c8at0t7xwevmr"]
 
 [ext_resource type="Script" path="res://scripts/objects/player.gd" id="1_wm7v8"]
 [ext_resource type="PackedScene" uid="uid://gcso6pn2lfot" path="res://scenes/objects/sprite.tscn" id="3_oy13s"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://scripts/resources/weapon_resource.gd" id="6_6skat"]
 [ext_resource type="Image" uid="uid://dqn6d43fbbih6" path="res://assets/player-center.png" id="6_6sp4o"]
 [ext_resource type="Script" path="res://scripts/components/lock_y.gd" id="9_bdkco"]
+[ext_resource type="PackedScene" uid="uid://csk4ulwdn6hd2" path="res://scenes/damage_effect.tscn" id="10_wxdou"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_stm2o"]
 radius = 0.108389
@@ -84,3 +85,8 @@ hframes = 2
 
 [node name="LockY" type="Node" parent="."]
 script = ExtResource("9_bdkco")
+
+[node name="DamageEffect" parent="." instance=ExtResource("10_wxdou")]
+unique_name_in_owner = true
+size = Vector2(0, 0)
+oneshot = true

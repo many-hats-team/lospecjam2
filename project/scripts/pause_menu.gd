@@ -60,7 +60,9 @@ func open() -> void:
 		continue_button.grab_focus()
 	else:
 		restart_button.grab_focus()
+
 	mgmt.pause()
+	mgmt.pause_menu_opened.emit()
 
 
 func close() -> void:
@@ -69,6 +71,8 @@ func close() -> void:
 		return
 
 	visible = false
+
+	mgmt.pause_menu_closed.emit()
 	mgmt.unpause()
 
 

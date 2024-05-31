@@ -18,11 +18,13 @@ extends Node3D
 
 @onready var reload_timer := %ReloadTimer as Timer
 @onready var burst_timer := %BurstTimer as Timer
+@onready var sfx := %SFX as AudioStreamPlayer
 
 
 func _ready() -> void:
 	assert(reload_timer)
 	assert(burst_timer)
+	assert(sfx)
 	weapon = weapon
 
 	mgmt.boss_died.connect(_disable_weapons)
@@ -106,6 +108,8 @@ func _shoot_round() -> void:
 				is_enemy,
 				mesh
 			)
+
+	sfx.play()
 
 
 func _spawn_bullet(

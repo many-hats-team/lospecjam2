@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://gcso6pn2lfot"]
+[gd_scene load_steps=6 format=3 uid="uid://gcso6pn2lfot"]
 
 [ext_resource type="Texture2D" uid="uid://cheieh1gokv2j" path="res://assets/enemy.png" id="1_3ybmj"]
 [ext_resource type="Shader" path="res://shaders/sprite_shader.gdshader" id="1_lwaed"]
 [ext_resource type="Script" path="res://scripts/objects/sprite.gd" id="2_gc178"]
+[ext_resource type="AudioStream" uid="uid://dlkdwiurhfixh" path="res://assets/vendor/chip-sfx.ogg" id="3_jk7dx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cj5qo"]
 resource_local_to_scene = true
@@ -34,3 +35,8 @@ script = ExtResource("2_gc178")
 unique_name_in_owner = true
 wait_time = 0.1
 autostart = true
+
+[node name="FlashSfx" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_jk7dx")
+bus = &"SFX"

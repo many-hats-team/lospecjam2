@@ -9,6 +9,8 @@ signal boss_removed
 signal game_over_win
 signal game_over_lose
 signal restart_requested
+signal pause_menu_opened
+signal pause_menu_closed
 
 # Read-Only Signals: Below signals should only be emitted from this script
 signal paused

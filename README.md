@@ -2,6 +2,30 @@
 
 Title TBD
 
+## Vendor Assets
+
+`assets/vendor/` licensed files not included in repo
+
+- `stage_music.ogg`
+    - Retro Battle Theme #4 (looped).wav
+    - by Andrey Sitkov
+    - https://soundcloud.com/muzstation-game-music
+
+- `damage-sfx.ogg`
+    - Retro SFX Sound Pack - SFX_hit&damage5.wav
+    - by cyberleaf
+    - https://www.gamedevmarket.net/asset/retro-sfxs-sound-pack 
+
+- `shot-sfx.ogg`
+    - Retro SFX Sound Pack - SFX_shot2.wav
+    - by cyberleaf
+    - https://www.gamedevmarket.net/asset/retro-sfxs-sound-pack 
+
+- `chip-sfx.ogg`
+    - Retro SFX Sound Pack - SFX_hit&damage6.wav
+    - by cyberleaf
+    - https://www.gamedevmarket.net/asset/retro-sfxs-sound-pack 
+
 ## TODO
 
 Player
