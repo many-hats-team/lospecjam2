@@ -53,6 +53,12 @@ func get_input_vector() -> Vector2:
 
 func _physics_process(delta: float) -> void:
 	if is_input_enabled and not is_game_over:
+		# Bomb
+		if Input.is_action_just_pressed("player_a") or Input.is_action_just_pressed("player_b"):
+			if mgmt.state.has_bomb:
+				mgmt.use_bomb.emit()
+
+		# Movement
 		var target_velocity := get_input_vector() * MOVE_INPUT_SCALE
 		var weight = pow(MOVE_LERP_BASE, delta * MOVE_LERP_SCALE)
 		velocity.x = lerpf(target_velocity.x, velocity.x, weight)

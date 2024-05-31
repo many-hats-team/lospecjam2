@@ -1,12 +1,16 @@
-[gd_scene load_steps=20 format=3 uid="uid://cahesrp5r3fya"]
+[gd_scene load_steps=24 format=3 uid="uid://cahesrp5r3fya"]
 
 [ext_resource type="AudioStream" uid="uid://5v2bdqx6u3p0" path="res://assets/vendor/stage-music.ogg" id="1_atdtc"]
 [ext_resource type="Texture2D" uid="uid://dp8bo4bps41x6" path="res://assets/background-layer1.png" id="1_c3i6r"]
 [ext_resource type="Script" path="res://scripts/music.gd" id="2_2hsyy"]
 [ext_resource type="Texture2D" uid="uid://b7piee4tst5c6" path="res://assets/background-layer2.png" id="2_sh3de"]
+[ext_resource type="Script" path="res://scripts/bomb_sfx.gd" id="3_akfaf"]
 [ext_resource type="Texture2D" uid="uid://bag5bmyhncjlr" path="res://assets/background-layer3.png" id="3_fman4"]
+[ext_resource type="AudioStream" uid="uid://dm0di7foxspxv" path="res://assets/vendor/bomb-sfx.ogg" id="3_ouwu0"]
 [ext_resource type="Texture2D" uid="uid://cvowy0mjyyx7l" path="res://assets/background-layer4.png" id="4_c23a3"]
+[ext_resource type="Texture2D" uid="uid://5rlj53jjrouf" path="res://assets/background-bomb-sky.png" id="4_pvcn8"]
 [ext_resource type="Script" path="res://scripts/world.gd" id="5_32ryi"]
+[ext_resource type="Script" path="res://scripts/background_bomb_sky.gd" id="5_42icc"]
 [ext_resource type="PackedScene" uid="uid://008g4gtbtf0n" path="res://scenes/objects/road.tscn" id="6_s0c51"]
 [ext_resource type="Script" path="res://scripts/objects/camera_follow.gd" id="7_hli4n"]
 [ext_resource type="PackedScene" uid="uid://c8at0t7xwevmr" path="res://scenes/objects/player.tscn" id="8_j03ps"]
@@ -35,6 +39,13 @@ autoplay = true
 bus = &"Music"
 script = ExtResource("2_2hsyy")
 
+[node name="BombSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_ouwu0")
+volume_db = 10.0
+pitch_scale = 0.79
+bus = &"SFX"
+script = ExtResource("3_akfaf")
+
 [node name="MainLayer" type="CanvasLayer" parent="."]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="MainLayer"]
@@ -47,6 +58,13 @@ texture_filter = 1
 texture_repeat = 2
 texture = ExtResource("1_c3i6r")
 centered = false
+
+[node name="Background-bomb" type="Sprite2D" parent="MainLayer/ParallaxBackground/Sky"]
+texture_filter = 1
+texture_repeat = 2
+texture = ExtResource("4_pvcn8")
+centered = false
+script = ExtResource("5_42icc")
 
 [node name="Background-layer2" type="Sprite2D" parent="MainLayer/ParallaxBackground/Sky"]
 texture_filter = 1

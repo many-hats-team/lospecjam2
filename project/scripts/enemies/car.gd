@@ -20,6 +20,7 @@ func _ready() -> void:
 	sprite.frame_end = sprite.frame_start + 1
 
 	mgmt.boss_died.connect(_on_death)
+	mgmt.use_bomb.connect(_on_death)
 
 
 func _physics_process(_delta: float) -> void:
@@ -31,6 +32,7 @@ func _physics_process(_delta: float) -> void:
 func _on_death() -> void:
 	is_dead = true
 	damage_effect.start()
+	sprite.hit_flash()
 	sprite.frame_start = 5 * 4
 	sprite.frame_end = sprite.frame_start + 1
 	sprite.frame = sprite.frame_start

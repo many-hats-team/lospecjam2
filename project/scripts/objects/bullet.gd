@@ -14,11 +14,11 @@ var ground_height: float
 
 @onready var raycast := %Raycast3D as RayCast3D
 
-func setup(gpos: Vector3, vel: Vector3, is_enemy_bullet: bool, mesh_: Mesh) -> void:
+func setup(gpos: Vector3, vel: Vector3, is_enemy: bool, mesh_: Mesh) -> void:
 	global_position = gpos
 	velocity = vel
 
-	if is_enemy_bullet:
+	if is_enemy:
 		# target player
 		raycast.collision_mask = COL_MASK_ENEMY_BULLET
 	else:
@@ -29,6 +29,10 @@ func setup(gpos: Vector3, vel: Vector3, is_enemy_bullet: bool, mesh_: Mesh) -> v
 
 func _ready() -> void:
 	assert(raycast)
+	mgmt.use_bomb.connect(func():
+		if is_enemy_bullet():
+			queue_free()
+	)
 
 func _physics_process(delta: float) -> void:
 	raycast.target_position = (

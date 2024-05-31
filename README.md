@@ -26,6 +26,16 @@ Title TBD
     - by cyberleaf
     - https://www.gamedevmarket.net/asset/retro-sfxs-sound-pack 
 
+- `bomb-sfx.ogg`
+    - Retro SFX Sound Pack - SFX_explosion3.wav
+    - by cyberleaf
+    - https://www.gamedevmarket.net/asset/retro-sfxs-sound-pack 
+
+- `pickup-sfx.ogg`
+    - Retro SFX Sound Pack - SFX_collect_bonus5.wav
+    - by cyberleaf
+    - https://www.gamedevmarket.net/asset/retro-sfxs-sound-pack 
+
 ## TODO
 
 Player

@@ -7,6 +7,7 @@ const COUNT_PIPS := 8
 
 @onready var _digits := util.multidup(%Digit, COUNT_DIGITS, -8.0)
 @onready var _pips := util.multidup(%Pip, COUNT_PIPS, -6.0)
+@onready var bomb_icon := %BombIcon as Sprite2D
 
 
 var display_score := 0.0
@@ -14,6 +15,9 @@ var target_score := 0.0
 
 
 func _ready() -> void:
+	assert(bomb_icon)
+	bomb_icon.visible = false
+
 	_on_lives_changed(mgmt.state.player_lives)
 	mgmt.player_lives_changed.connect(_on_lives_changed)
 
@@ -22,6 +26,8 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	bomb_icon.visible = mgmt.state.has_bomb
+
 	if display_score != target_score:
 		display_score = util.damp(display_score, target_score, 10.0 * delta)
 		_display(int(round(display_score)))

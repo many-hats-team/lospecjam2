@@ -25,6 +25,7 @@ mgmt="*res://scripts/game_manager.gd"
 
 gdscript/warnings/shadowed_variable=0
 gdscript/warnings/static_called_on_instance=0
+gdscript/warnings/redundant_await=2
 gdscript/warnings/integer_division=0
 
 [display]

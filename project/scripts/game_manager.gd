@@ -11,6 +11,9 @@ signal game_over_lose
 signal restart_requested
 signal pause_menu_opened
 signal pause_menu_closed
+signal pickup_life
+signal pickup_bomb
+signal use_bomb
 
 # Read-Only Signals: Below signals should only be emitted from this script
 signal paused
@@ -18,14 +21,17 @@ signal unpaused
 signal player_lives_changed(lives: int)
 signal score_changed(score: int)
 
+const PLAYER_MAX_LIVES := 8
+
 const BulletScene := preload("res://scenes/objects/bullet.tscn")
 
 class GameState extends RefCounted:
-	var player_lives := 8
+	var player_lives := PLAYER_MAX_LIVES / 2
 	var score := 0
-	var world_ref: WeakRef
-	var player_ref: WeakRef
+	var world_ref: WeakRef = weakref(null)
+	var player_ref: WeakRef = weakref(null)
 	var biker_count := 0
+	var has_bomb := false
 
 var state: GameState
 
@@ -34,6 +40,14 @@ var state: GameState
 
 func _ready() -> void:
 	reset_state()
+
+	pickup_life.connect(func(): add_life(1))
+	pickup_bomb.connect(func():
+		state.has_bomb = true
+	)
+	use_bomb.connect(func():
+		state.has_bomb = false
+	)
 
 
 func reset_state() -> void:
@@ -84,6 +98,9 @@ func add_score(x: int) -> void:
 
 func add_life(x: int) -> void:
 	state.player_lives += x
+	if state.player_lives > PLAYER_MAX_LIVES:
+		state.player_lives = PLAYER_MAX_LIVES
+		add_score(200)
 	player_lives_changed.emit(state.player_lives)
 
 

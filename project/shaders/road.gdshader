@@ -14,6 +14,7 @@ const float shoulderline_width_m = 0.1;
 const float shoulderline_gap_m = 0.1;
 const float speed = 0.15;
 
+uniform bool is_flashing = false;
 uniform bool is_paused = false;
 
 uniform vec3 color_offroad : source_color;
@@ -49,7 +50,9 @@ void vertex() {
 }
 
 void fragment() {
-	if (is_unit_within(UV.x, center_m + road_width_m * 0.5 - shoulderline_gap_m - shoulderline_width_m, shoulderline_width_m)) {
+	if (is_flashing) {
+		ALBEDO = vec3(0.5);
+	} else if (is_unit_within(UV.x, center_m + road_width_m * 0.5 - shoulderline_gap_m - shoulderline_width_m, shoulderline_width_m)) {
 		ALBEDO = color_whiteline;
 	} else if (is_unit_within(UV.x, center_m - road_width_m * 0.5 + shoulderline_gap_m, shoulderline_width_m)) {
 		ALBEDO = color_yellowline;

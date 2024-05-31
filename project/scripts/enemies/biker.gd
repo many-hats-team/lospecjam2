@@ -1,10 +1,13 @@
 extends CharacterBody3D
 
+const PickupScene := preload("res://scenes/objects/pickup.tscn")
+
 const BIKER_HEALTH := 21
 const BIKER_ENTRY_DURATION_S := 2.0
 const BIKER_SCORE := 100
 const BIKER_TARGET_Z_MIN := -2.0
 const BIKER_TARGET_Z_MAX := 0.0
+const BIKER_PICKUP_RATE := 0.3
 
 enum Dir {
 	LEFT,
@@ -24,6 +27,7 @@ func _ready() -> void:
 	assert(damage_effect)
 
 	Mortal.new(self, BIKER_HEALTH, sprite, _on_death)
+	mgmt.use_bomb.connect(_on_death)
 	mgmt.boss_died.connect(_on_death)
 	mgmt.state.biker_count += 1
 
@@ -38,6 +42,7 @@ func _on_death() -> void:
 	is_dead = true
 	damage_effect.start()
 	weapon.stop()
+	sprite.hit_flash()
 	mgmt.add_score(BIKER_SCORE)
 	mgmt.state.biker_count -= 1
 
@@ -54,6 +59,13 @@ func _on_death() -> void:
 		sprite.frame_end -= 1
 
 	await mgmt.pausable_timer(1.0).timeout
+
+	if randf() < BIKER_PICKUP_RATE:
+		var pickup := PickupScene.instantiate()
+		pickup.position = position
+		pickup.position.y = 0.0
+		add_sibling(pickup)
+
 	queue_free()
 
 

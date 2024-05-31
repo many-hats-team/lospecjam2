@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://c0sxx3nwn2xey"]
+[gd_scene load_steps=6 format=3 uid="uid://c0sxx3nwn2xey"]
 
 [ext_resource type="Script" path="res://scripts/ui/player_ui.gd" id="1_hbf7i"]
 [ext_resource type="Texture2D" uid="uid://4623eapbuadn" path="res://assets/player-ui.png" id="1_qcg6g"]
 [ext_resource type="Texture2D" uid="uid://d1hwxg1npivxm" path="res://assets/player-ui-digits-Sheet.png" id="2_5rquf"]
 [ext_resource type="Texture2D" uid="uid://nfonld2is702" path="res://assets/player-ui-pip.png" id="4_tfweh"]
+[ext_resource type="Texture2D" uid="uid://dma7wnd7vw5bg" path="res://assets/bomb-icon.png" id="5_2cnn8"]
 
 [node name="PlayerUI" type="Node2D"]
 script = ExtResource("1_hbf7i")
@@ -30,3 +31,8 @@ texture_repeat = 1
 position = Vector2(60, 4)
 texture = ExtResource("4_tfweh")
 centered = false
+
+[node name="BombIcon" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(86, 19)
+texture = ExtResource("5_2cnn8")

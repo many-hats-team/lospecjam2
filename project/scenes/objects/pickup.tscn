@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://b7me3vdmgko0g"]
+
+[ext_resource type="Script" path="res://scripts/objects/pickup.gd" id="1_roxm4"]
+[ext_resource type="PackedScene" uid="uid://gcso6pn2lfot" path="res://scenes/objects/sprite.tscn" id="2_21cju"]
+[ext_resource type="Shader" path="res://shaders/sprite_shader.gdshader" id="3_3q1i8"]
+[ext_resource type="Texture2D" uid="uid://c6bg8nmarc0fu" path="res://assets/pickups-Sheet.png" id="4_xs0c6"]
+[ext_resource type="AudioStream" uid="uid://bp0fqdnyikxe8" path="res://assets/vendor/pickup-sfx.ogg" id="5_l7mnt"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qouoc"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_3q1i8")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/alpha_scissor_threshold = 0.5
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/flash = false
+shader_parameter/flash_color = Vector3(1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("4_xs0c6")
+
+[node name="Pickup" type="Node3D"]
+script = ExtResource("1_roxm4")
+
+[node name="Sprite" parent="." instance=ExtResource("2_21cju")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+material_override = SubResource("ShaderMaterial_qouoc")
+texture = ExtResource("4_xs0c6")
+vframes = 2
+frame_end = 0
+
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("5_l7mnt")
