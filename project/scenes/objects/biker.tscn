@@ -35,7 +35,7 @@ shader_parameter/metallic_texture_channel = null
 shader_parameter/specular = 0.5
 shader_parameter/metallic = 0.0
 shader_parameter/uv1_scale = Vector3(1, 1, 1)
-shader_parameter/uv1_offset = Vector3(32, 0, 0)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
 shader_parameter/uv2_scale = Vector3(1, 1, 1)
 shader_parameter/uv2_offset = Vector3(0, 0, 0)
 shader_parameter/flash = false
@@ -62,7 +62,7 @@ material_override = SubResource("ShaderMaterial_q1rys")
 texture = ExtResource("6_s7jb4")
 hframes = 10
 vframes = 2
-frame = 9
+frame = 8
 frame_start = 8
 frame_end = 9
 

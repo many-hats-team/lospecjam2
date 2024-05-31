@@ -25,6 +25,7 @@ class GameState extends RefCounted:
 	var score := 0
 	var world_ref: WeakRef
 	var player_ref: WeakRef
+	var biker_count := 0
 
 var state: GameState
 

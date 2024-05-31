@@ -9,6 +9,8 @@ enum Kind {
 	BIKER,
 }
 
+const MAX_BIKERS := 4
+
 @export var kind: Kind
 
 @export var speed: float
@@ -44,6 +46,8 @@ func _on_timeout() -> void:
 			Kind.CAR:
 				enemy = CarScene.instantiate()
 			Kind.BIKER:
+				if mgmt.state.biker_count >= MAX_BIKERS:
+					return
 				enemy = BikerScene.instantiate()
 		enemy.position = global_position + Vector3(rng.randf_range(-offset, offset), 0, 0)
 		world.add_child(enemy)

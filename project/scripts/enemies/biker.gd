@@ -25,6 +25,7 @@ func _ready() -> void:
 
 	Mortal.new(self, BIKER_HEALTH, sprite, _on_death)
 	mgmt.boss_died.connect(_on_death)
+	mgmt.state.biker_count += 1
 
 	await create_tween()\
 		.tween_property(self, "position:z", rng.randf_range(BIKER_TARGET_Z_MIN, BIKER_TARGET_Z_MAX), BIKER_ENTRY_DURATION_S)\
@@ -38,19 +39,25 @@ func _on_death() -> void:
 	damage_effect.start()
 	weapon.stop()
 	mgmt.add_score(BIKER_SCORE)
+	mgmt.state.biker_count -= 1
 
 	# Disable collision
 	collision_layer = 0
 	collision_mask = 0
+
+	# Make sprite shake
+	if aim_position < 0:
+		sprite.frame_end += 1
+		sprite.frame_start += 1
+	else:
+		sprite.frame_start -= 1
+		sprite.frame_end -= 1
 
 	await mgmt.pausable_timer(1.0).timeout
 	queue_free()
 
 
 func _anim_turn(direction: Dir) -> void:
-	# This function has a bug in it that causes the sprite to shake when dying.
-	# Leaving it in because it looks cool.
-
 	if is_dead:
 		return
 
@@ -62,9 +69,9 @@ func _anim_turn(direction: Dir) -> void:
 
 	var frame := posmod(sprite.frame, 2)
 	if aim_position < 0:
-		sprite.frame_start = 9 + 2 * aim_position
+		sprite.frame_start = 8 + 2 * aim_position
 	else:
-		sprite.frame_start = 19 - 2 * aim_position
+		sprite.frame_start = 18 - 2 * aim_position
 	sprite.frame_end = sprite.frame_start + 1
 	sprite.frame = sprite.frame_start + frame
 
