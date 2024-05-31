@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://bu3dgfpefsqbi"]
+[gd_scene load_steps=11 format=3 uid="uid://bu3dgfpefsqbi"]
 
 [ext_resource type="PackedScene" uid="uid://cuef00urlja7j" path="res://scenes/objects/weapon.tscn" id="2_lsn2e"]
 [ext_resource type="Script" path="res://scripts/resources/weapon_resource.gd" id="3_u0oab"]
 [ext_resource type="PackedScene" uid="uid://gcso6pn2lfot" path="res://scenes/objects/sprite.tscn" id="4_jpjp6"]
 [ext_resource type="Shader" path="res://shaders/sprite_shader.gdshader" id="5_v7nau"]
 [ext_resource type="Texture2D" uid="uid://bboovhl153nts" path="res://assets/enemy-Sheet.png" id="6_s7jb4"]
+[ext_resource type="PackedScene" uid="uid://csk4ulwdn6hd2" path="res://scenes/damage_effect.tscn" id="7_q68x4"]
 [ext_resource type="Script" path="res://scripts/enemies/biker.gd" id="7_sdmmb"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6jsf0"]
@@ -50,6 +51,7 @@ script = ExtResource("7_sdmmb")
 shape = SubResource("BoxShape3D_6jsf0")
 
 [node name="Weapon" parent="." instance=ExtResource("2_lsn2e")]
+unique_name_in_owner = true
 weapon = SubResource("Resource_2sepf")
 is_enemy = true
 auto_fire = true
@@ -61,5 +63,16 @@ texture = ExtResource("6_s7jb4")
 hframes = 10
 vframes = 2
 frame = 9
-frame_start = 9
-frame_end = 10
+frame_start = 8
+frame_end = 9
+
+[node name="DamageEffect" parent="." instance=ExtResource("7_q68x4")]
+unique_name_in_owner = true
+kind = 2
+size = Vector2(0.3, 0.5)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

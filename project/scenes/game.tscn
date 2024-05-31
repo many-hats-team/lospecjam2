@@ -152,6 +152,24 @@ offset = 0.4
 wait_min = 2.0
 wait_max = 8.0
 
+[node name="BikerSpawnLeft" type="Marker3D" parent="MainLayer/World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.3, -20)
+script = ExtResource("10_gaujq")
+kind = 1
+speed = 4.0
+offset = 1.25
+wait_min = 4.0
+wait_max = 8.0
+
+[node name="BikerSpawnRight" type="Marker3D" parent="MainLayer/World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.3, -20)
+script = ExtResource("10_gaujq")
+kind = 1
+speed = 4.0
+offset = 1.25
+wait_min = 4.0
+wait_max = 8.0
+
 [node name="BossSpawnPoint" type="Marker3D" parent="MainLayer/World"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, -42.6063)
 
