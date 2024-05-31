@@ -8,8 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://008g4gtbtf0n" path="res://scenes/objects/road.tscn" id="6_s0c51"]
 [ext_resource type="Script" path="res://scripts/objects/camera_follow.gd" id="7_hli4n"]
 [ext_resource type="PackedScene" uid="uid://c8at0t7xwevmr" path="res://scenes/objects/player.tscn" id="8_j03ps"]
+[ext_resource type="Script" path="res://scripts/components/enemy_spawner.gd" id="10_gaujq"]
 [ext_resource type="Script" path="res://scripts/objects/despawner.gd" id="10_wiqj0"]
-[ext_resource type="PackedScene" uid="uid://dpolfsh15rvao" path="res://scenes/components/enemy_spawner.tscn" id="11_tt8b7"]
 [ext_resource type="PackedScene" uid="uid://c0sxx3nwn2xey" path="res://scenes/ui/player_ui.tscn" id="12_6tpeq"]
 [ext_resource type="Script" path="res://scripts/spawn_boss.gd" id="12_um6i2"]
 [ext_resource type="PackedScene" uid="uid://bklt26gd3x6dy" path="res://scenes/ui/boss_ui.tscn" id="13_45bgl"]
@@ -127,13 +127,21 @@ script = ExtResource("10_wiqj0")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0161133, 0.516174, -1.70575)
 shape = SubResource("BoxShape3D_cdsm1")
 
-[node name="EnemySpawnPoint" type="Marker3D" parent="MainLayer/World"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, -20)
-
-[node name="EnemySpawner" parent="MainLayer/World/EnemySpawnPoint" instance=ExtResource("11_tt8b7")]
-wait_time = 2.0
+[node name="CarSpawnLeft" type="Marker3D" parent="MainLayer/World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.3, -20)
+script = ExtResource("10_gaujq")
 speed = 4.0
-offset = 2.0
+offset = 0.4
+wait_min = 2.0
+wait_max = 8.0
+
+[node name="CarSpawnRight" type="Marker3D" parent="MainLayer/World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.3, -20)
+script = ExtResource("10_gaujq")
+speed = 4.0
+offset = 0.4
+wait_min = 2.0
+wait_max = 8.0
 
 [node name="BossSpawnPoint" type="Marker3D" parent="MainLayer/World"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, -42.6063)

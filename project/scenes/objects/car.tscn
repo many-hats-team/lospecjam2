@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://b37dry5xl67cl"]
+
+[ext_resource type="Script" path="res://scripts/objects/enemy.gd" id="1_sfgrt"]
+[ext_resource type="PackedScene" uid="uid://gcso6pn2lfot" path="res://scenes/objects/sprite.tscn" id="4_2vwqi"]
+[ext_resource type="Shader" path="res://shaders/sprite_shader.gdshader" id="5_x0x8j"]
+[ext_resource type="Texture2D" uid="uid://efsv2sqdsmlm" path="res://assets/cars.png" id="6_4r642"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6jsf0"]
+size = Vector3(1, 0.5, 0.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q1rys"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("5_x0x8j")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/alpha_scissor_threshold = 0.5
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(168, 60, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/flash = false
+shader_parameter/flash_color = Vector3(1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("6_4r642")
+
+[node name="Car" type="CharacterBody3D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_sfgrt")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_6jsf0")
+
+[node name="Sprite" parent="." instance=ExtResource("4_2vwqi")]
+unique_name_in_owner = true
+material_override = SubResource("ShaderMaterial_q1rys")
+texture = ExtResource("6_4r642")
+hframes = 2
+vframes = 10
+frame = 4
+frame_start = 4
+frame_end = 5
