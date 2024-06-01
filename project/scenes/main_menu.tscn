@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://gcrnfsjpbs3f"]
+[gd_scene load_steps=11 format=3 uid="uid://gcrnfsjpbs3f"]
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_kporo"]
 [ext_resource type="Script" path="res://scripts/objects/parallax_scroll.gd" id="2_n3c47"]
@@ -9,6 +9,7 @@
 [ext_resource type="FontFile" uid="uid://d0npbk5bb83mc" path="res://assets/fonts/04B_03__.TTF" id="7_3miw0"]
 [ext_resource type="Texture2D" uid="uid://beu6jejx0r76e" path="res://assets/game-logo.png" id="7_ihdqb"]
 [ext_resource type="Script" path="res://scripts/components/hide_on_web_build.gd" id="8_fgsio"]
+[ext_resource type="Texture2D" uid="uid://j14ydomgpf3q" path="res://assets/controls.png" id="8_u6vpt"]
 
 [node name="MainMenu" type="Node"]
 script = ExtResource("1_kporo")
@@ -49,7 +50,14 @@ texture = ExtResource("6_qqgrj")
 centered = false
 
 [node name="Title" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 texture = ExtResource("7_ihdqb")
+centered = false
+
+[node name="HowToPlay" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
+texture = ExtResource("8_u6vpt")
 centered = false
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -85,6 +93,13 @@ size_flags_vertical = 5
 theme_override_fonts/font = ExtResource("7_3miw0")
 text = "Start"
 
+[node name="HowToPlayButton" type="Button" parent="MarginContainer/VBoxContainer/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 5
+theme_override_fonts/font = ExtResource("7_3miw0")
+text = "How to Play"
+
 [node name="QuitButton" type="Button" parent="MarginContainer/VBoxContainer/Buttons"]
 layout_mode = 2
 size_flags_horizontal = 5
@@ -96,4 +111,5 @@ text = "Quit"
 script = ExtResource("8_fgsio")
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Buttons/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Buttons/HowToPlayButton" to="." method="_on_how_to_play_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Buttons/QuitButton" to="." method="_on_quit_button_pressed"]
