@@ -5,7 +5,7 @@ set -eou pipefail
 # Script settings
 
 OUTPUT_NAME="game"
-BUTLER_NAME="okayscott/lospec-shmup"
+BUTLER_NAME="okayscott/neon-nitro"
 BUTLER_CHANNEL_SUFFIX="-dev"
 
 GODOT=godot4
