@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bklt26gd3x6dy"]
+[gd_scene load_steps=5 format=3 uid="uid://bklt26gd3x6dy"]
 
 [ext_resource type="Texture2D" uid="uid://be3gfud88y8jp" path="res://assets/boss-ui.png" id="1_7yd3b"]
 [ext_resource type="Script" path="res://scripts/ui/boss_ui.gd" id="1_ikhwn"]
 [ext_resource type="Texture2D" uid="uid://c01pqeobhu360" path="res://assets/boss-ui-pip.png" id="3_byp63"]
+[ext_resource type="Texture2D" uid="uid://b5koyqare8ij" path="res://assets/boss-ind-Sheet.png" id="4_unq2v"]
 
 [node name="BossUI" type="Node2D"]
 script = ExtResource("1_ikhwn")
@@ -20,3 +21,10 @@ texture_repeat = 1
 position = Vector2(32, 4)
 texture = ExtResource("3_byp63")
 centered = false
+
+[node name="Icon" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(4, 4)
+texture = ExtResource("4_unq2v")
+centered = false
+hframes = 17
