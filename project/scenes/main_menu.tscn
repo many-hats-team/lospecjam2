@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://gcrnfsjpbs3f"]
+[gd_scene load_steps=10 format=3 uid="uid://gcrnfsjpbs3f"]
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_kporo"]
 [ext_resource type="Script" path="res://scripts/objects/parallax_scroll.gd" id="2_n3c47"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bag5bmyhncjlr" path="res://assets/background-layer3.png" id="5_ffeij"]
 [ext_resource type="Texture2D" uid="uid://cvowy0mjyyx7l" path="res://assets/background-layer4.png" id="6_qqgrj"]
 [ext_resource type="FontFile" uid="uid://d0npbk5bb83mc" path="res://assets/fonts/04B_03__.TTF" id="7_3miw0"]
+[ext_resource type="Texture2D" uid="uid://beu6jejx0r76e" path="res://assets/game-logo.png" id="7_ihdqb"]
 [ext_resource type="Script" path="res://scripts/components/hide_on_web_build.gd" id="8_fgsio"]
 
 [node name="MainMenu" type="Node"]
@@ -47,6 +48,10 @@ texture_repeat = 2
 texture = ExtResource("6_qqgrj")
 centered = false
 
+[node name="Title" type="Sprite2D" parent="."]
+texture = ExtResource("7_ihdqb")
+centered = false
+
 [node name="MarginContainer" type="MarginContainer" parent="."]
 custom_minimum_size = Vector2(256, 224)
 theme_override_constants/margin_left = 10
@@ -59,6 +64,7 @@ layout_mode = 2
 alignment = 1
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("7_3miw0")
